@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const customerModel = require("../Model/user.model");
 
@@ -24,4 +25,24 @@ customerRouter.post("/register", (req, res) => {
   });
 });
 
-module.exports = customerRouter
+customerRouter.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await customerModel.findOne({ email });
+  if (!user) {
+    return res.send("Invalid Credentials");
+  }
+  const hashed_password = user.password;
+  bcrypt.compare(password, hashed_password, async function (err, result) {
+    if (result) {
+      var token = jwt.sign(
+        { email: user.email },
+        process.env.jwt_secret_key
+      );
+      return res.send({ massage: "Login Successful", token: token });
+    } else {
+      return res.send("Invalid Credentials");
+    }
+  });
+});
+
+module.exports = customerRouter;
