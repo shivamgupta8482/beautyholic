@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, List, ListItem, SimpleGrid, Text, UnorderedList } from "@chakra-ui/react";
-//import {BsFacebook,BsInstagram} from 'react-icons/bs'
+import {BsFacebook,BsInstagram} from 'react-icons/bs'
 const Footer = () => {
   return (
     <div>
@@ -15,8 +15,8 @@ const Footer = () => {
                   <Text _hover={{color : '#dd0285', cursor : 'pointer'}}>support@beautybebo.com <br /> sales@beautybebo.com</Text>
                   <Text _hover={{color : '#dd0285', cursor : 'pointer'}}>Open time: 10:00AM - 7:00PM</Text>
                   <Box display='flex' gap='30px' fontSize='30px'color='#dd0285' mt='20px'>
-                    {/* < BsFacebook></BsFacebook> */}
-                    {/* <BsInstagram/> */}
+                    < BsFacebook></BsFacebook>
+                    <BsInstagram/>
                   </Box>
                 </Box>
             </Box>
