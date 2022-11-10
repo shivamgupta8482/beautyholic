@@ -2,6 +2,101 @@ import React, { useEffect, useState } from 'react'
 import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text,Button } from "@chakra-ui/react";
 
 const SignUpform = () => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  // const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
+  const [phoneNo, setPhoneNo] = useState('');
+  const [confirmpassword, setConfirmpassword] = useState('');
+
+const data = {
+  first_name:name,
+  last_name:userName,
+  email:email,
+  phone:phoneNo,
+  password:password
+
+
+}
+
+
+  const postdata = (data) => {
+    fetch('http://localhost:8080/signup', {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+  })
+  .then((response) => response.json())
+  .then((data) => {
+  // console.log(data);
+   if(data.message=="user already present"){
+alert("user is already present")
+   }
+   else if(data.message=="sign up successful") {
+    alert("signup succesful")
+   }
+
+  
+  })
+  .catch((error) => {
+   // console.error('Error:', error);
+   return error;
+  });
+  
+    
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const handleClick=()=>{
+  if(email && password && name && userName && userName && phoneNo && confirmpassword && password!=confirmpassword){
+    alert("password and confirm password not matches");
+   
+    setPassword("");
+    setConfirmpassword("");
+  }
+  else if(email && password && name && userName && userName && phoneNo && confirmpassword && password==confirmpassword){
+  console.log(1);
+  alert("sign up successfull")
+  setEmail("");
+  setName("");
+  setPassword("");
+  setPhoneNo("");
+  setUserName("");
+  setConfirmpassword("");
+
+ }
+else{
+  alert("fill all details");
+}
+
+ 
+}
+
+
+
+
+
+
   const [isDesktop, setDesktop] = useState(window.innerWidth > 1050);
 
   const updateMedia = () => {
@@ -22,28 +117,33 @@ const SignUpform = () => {
    
 
     <FormControl isRequired mt='20px' >
-        <FormLabel>Full Name</FormLabel>
-        <Input size='md' mt='1px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
+        <FormLabel >Full Name</FormLabel>
+        <Input value={name} size='md' onChange={(e)=>{setName(e.target.value)}} mt='1px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
     </FormControl>
 
     <FormControl isRequired mt='20px' >
-        <FormLabel>Email</FormLabel>
-        <Input size='md' mt='1px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
+        <FormLabel >Email</FormLabel>
+        <Input value={email} onChange={(e)=>{setEmail(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
     </FormControl>
 
     <FormControl isRequired mt='20px' >
-        <FormLabel>Phone</FormLabel>
-        <Input size='md' mt='1px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
+        <FormLabel >User Name</FormLabel>
+        <Input value={userName} onChange={(e)=>{setUserName(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
+    </FormControl>
+
+    <FormControl isRequired mt='20px' >
+        <FormLabel >Phone</FormLabel>
+        <Input value={phoneNo} onChange={(e)=>{setPhoneNo(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
     </FormControl>
 
     <FormControl isRequired mt='20px'>
-        <FormLabel>Password</FormLabel>
-        <Input size='md' mt='1px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='text' name='Fname'  value={FormData.Fname} />
+        <FormLabel >Password</FormLabel>
+        <Input value={password} onChange={(e)=>{setPassword(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='text' name='Fname' />
     </FormControl>
 
     <FormControl isRequired mt='20px'>
         <FormLabel>Confirm Password</FormLabel>
-        <Input size='md' mt='1px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='text' name='Fname'  value={FormData.Fname} />
+        <Input value={confirmpassword} onChange={(e)=>{setConfirmpassword(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='text' name='Fname'   />
     </FormControl>
     <br />
 <Flex>
@@ -51,7 +151,7 @@ const SignUpform = () => {
 height='48px'
 width='190px'
 border='2px'
-borderColor='green.500' colorScheme="green">CREATE AN ACCOUNT </Button>
+borderColor='green.500' colorScheme="green" onClick={handleClick}>CREATE AN ACCOUNT </Button>
 
 </Flex>
     
