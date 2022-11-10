@@ -34,7 +34,7 @@ customerRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const user = await customerModel.findOne({ email });
   if (!user) {
-    return res.send({ message: "Invalid Credentials" });
+    return res.send({ message: "User not exists" });
   }
   const hashed_password = user.password;
   bcrypt.compare(password, hashed_password, async function (err, result) {
