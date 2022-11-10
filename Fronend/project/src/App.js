@@ -2,13 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 import Mainroutes from './Routes/Mainroutes';
 import Footer from './Components/Footer';
-import Navbar from './Components/Navbar';
+import Home from './Components/Home/Home';
+
 
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <Home />
     <Mainroutes />
     <Footer />
     </div>
