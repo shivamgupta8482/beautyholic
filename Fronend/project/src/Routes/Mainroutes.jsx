@@ -9,6 +9,7 @@ import Privateroute from './Privateroute';
 import Productspage from './Productspage';
 import Signup from './Signup';
 import Singleproductpage from './Singleproductpage';
+import Cart from "./Cart"
 
 const Mainroutes = () => {
   return (
@@ -20,6 +21,7 @@ const Mainroutes = () => {
         <Route path='/Login' element={<Loginpage></Loginpage>}></Route>
         <Route path='/Signup' element={<Signup></Signup>}></Route>
         <Route path='/PaymentPage/:id' element={<Privateroute><Paymentpage></Paymentpage></Privateroute>}></Route>
+        <Route path='/Cart' element={<Cart />}></Route>
         <Route path='/CheckoutPage' element={<Checkoutpage></Checkoutpage>}></Route>
        
     </Routes>

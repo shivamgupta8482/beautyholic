@@ -1,12 +1,47 @@
 import React from 'react'
-import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text,Button } from "@chakra-ui/react";
+import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text,Button,Center,Heading } from "@chakra-ui/react";
+import GoogleSign from '../Components/SignUp/GoogleSign';
+import { useState, useEffect } from "react";
+
 
 const Loginpage = () => {
+  const [isDesktop, setDesktop] = useState(window.innerWidth > 1050);
+
+  const updateMedia = () => {
+    setDesktop(window.innerWidth > 1070);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  });
+
   return (
     <>
-    <Box h={{base : '110px', md : '155px', lg : '220px'}}></Box>
     
+    <Box h={{base : '110px', md : '155px', lg : '220px'}}></Box>
+   {
+    isDesktop?<Box width="30%" >
+    <Center><Heading>CUSTOMER LOGIN</Heading></Center>
+    </Box>:<Box width="100%" >
+   <Center><Heading>CUSTOMER LOGIN</Heading></Center>
+   </Box>
+   }
+    <br />
+ {
+  isDesktop?  <Box marginLeft="12%" marginBottom={"-3%"}>
+  <GoogleSign />
+<br />
+   <Text marginLeft="15%">--OR--</Text>
+  
+   
+  </Box>:<></>
+ }
+   
     <Flex className="CheckOutMainFlex" gap="30px"   direction={{base :'column', md :'row'}} w={{base :'95%', md :'95%', lg :'90%'}} rowGap='30px'> 
+     
+     
+     
       <Box  border={'2px solid #dd2985'} w={{base : '90%', md : '60%', lg : '40%'}}  m='auto' mt='5%' padding='30px' w={{base : '100%', md :'60%', lg : '70%'}}>
           <Text  fontSize='2xl'>REGISTERED CUSTOMERS</Text>
 
