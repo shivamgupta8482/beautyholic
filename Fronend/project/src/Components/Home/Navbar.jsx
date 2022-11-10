@@ -4,12 +4,25 @@ import {BsCartCheck} from 'react-icons/bs'
 import {Link} from 'react-router-dom'
 import { useContext } from 'react'
 import BeautyHolic from "../../Assets/BeautyHolic.png"
+import { useState,useEffect } from 'react'
 // import { CartContext } from '../Context/CartContext'
 export default function Navbar ( ){
     // const {TotalCartPrice,SetTotalCartPrice,CartData} = useContext();
+    const [isDesktop, setDesktop] = useState(window.innerWidth > 1050);
+
+    const updateMedia = () => {
+      setDesktop(window.innerWidth > 1070);
+    };
+  
+    useEffect(() => {
+      window.addEventListener("resize", updateMedia);
+      return () => window.removeEventListener("resize", updateMedia);
+    });
+  
     return (
         <>
-        <div className='NavMainDiv'>
+       {
+        isDesktop? <div className='NavMainDiv'>
         <Box maxW='100%'  className='TopNav'>
             <Image boxSize='100%' m='auto' src='https://www.beautybebo.com/pub/media/ads/ad-desktop.jpg'/>
         </Box>
@@ -237,7 +250,10 @@ export default function Navbar ( ){
                 </Box>
             </Flex>
         </Box>
-        </div>
+        </div>:<>
+        
+        </>
+       }
         </>
     );
 };
