@@ -2,9 +2,24 @@ import React from 'react'
 import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text,Button,Center,Heading } from "@chakra-ui/react";
 import GoogleSign from '../Components/SignUp/GoogleSign';
 import { useState, useEffect } from "react";
-
+import { useNavigate } from 'react-router-dom';
+import {useDispatch} from "react-redux"
+import { login } from '../Redux/AuthReducer/action';
 
 const Loginpage = () => {
+
+//local states--------------------------------------------------------------------------------------------------
+const [email,setEmail] =useState("");
+const [password,setPassword] = useState("");
+const [message,setMessage]=useState([]);
+
+
+const dispatch = useDispatch();
+const navigate =useNavigate();
+
+
+//-------------------------------------------------------------------------------------------------------------
+//usemedia hook------------------------------------------------------------------------------------------------
   const [isDesktop, setDesktop] = useState(window.innerWidth > 1050);
 
   const updateMedia = () => {
@@ -15,6 +30,44 @@ const Loginpage = () => {
     window.addEventListener("resize", updateMedia);
     return () => window.removeEventListener("resize", updateMedia);
   });
+
+
+//--------------------------------------------------------------------------------------------------------------
+//handlecreate----------------------------------------------------------------------------------------------
+const handleCreate=()=>{
+  navigate("/signup");
+}
+//---------------------------------------------------------------------------------------------------------------
+const handleClick=()=>{
+  let loginData = {
+    email: email,
+    password: password,
+  };
+  //let loggeduser = loginData.username;
+  if (email && password) {
+    dispatch(login(loginData)).then(r =>
+      setMessage(r.payload)
+      // navigate('/', { state: loggeduser })  
+    )
+    if(message.message=="Login Successful"){
+      alert("login successful");
+     // setEmail(""),
+//setPassword("")
+    }else if(message.message=="User not exists"){
+      alert("inalid credentials");
+    //  setEmail(""),
+//setPassword("")
+    }
+   
+  }else{
+    alert("fill all fields");
+  }
+ 
+  
+}
+
+
+
 
   return (
     <>
@@ -38,70 +91,72 @@ const Loginpage = () => {
   </Box>:<></>
  }
    
-    <Flex className="CheckOutMainFlex" gap="30px"   direction={{base :'column', md :'row'}} w={{base :'95%', md :'95%', lg :'90%'}} rowGap='30px'> 
+   <Box>
+   <Flex className="CheckOutMainFlex" gap="30px"   direction={{base :'column', md :'row'}} w={{base :'95%', md :'95%', lg :'90%'}} rowGap='30px'> 
      
      
      
-      <Box  border={'2px solid #dd2985'} w={{base : '90%', md : '60%', lg : '40%'}}  m='auto' mt='5%' padding='30px' w={{base : '100%', md :'60%', lg : '70%'}}>
-          <Text  fontSize='2xl'>REGISTERED CUSTOMERS</Text>
+     <Box  border={'2px solid #dd2985'} w={{base : '90%', md : '60%', lg : '40%'}}  m='auto' mt='5%' padding='30px' w={{base : '100%', md :'60%', lg : '70%'}}>
+         <Text  fontSize='2xl'>REGISTERED CUSTOMERS</Text>
 
-          <Divider/>
-          <br /><br />
-          <Text>If you have an account, sign in with your email address.</Text>
-          <br />
+         <Divider/>
+         <br /><br />
+         <Text>If you have an account, sign in with your email address.</Text>
+         <br />
 
-          <FormControl isRequired mt='20px' >
-              <FormLabel>Email</FormLabel>
-              <Input size='sm' mt='10px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
-          </FormControl>
+         <FormControl isRequired mt='20px' >
+             <FormLabel>Email</FormLabel>
+             <Input value={email} onChange={(e)=>{setEmail(e.target.value)}} size='lg' mt='10px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
+         </FormControl>
 
-          <FormControl isRequired mt='20px'>
-              <FormLabel>Password</FormLabel>
-              <Input size='sm' mt='10px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='text' name='Fname'  value={FormData.Fname} />
-          </FormControl>
-          <br />
+         <FormControl isRequired mt='20px'>
+             <FormLabel>Password</FormLabel>
+             <Input value={password} onChange={(e)=>{setPassword(e.target.value)}} size='lg' mt='10px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='text' name='Fname'  value={FormData.Fname} />
+         </FormControl>
+         <br />
 <Flex>
- <Button   size='sm'
-  height='48px'
-  width='150px'
-  border='2px'
-  borderColor='green.500' colorScheme="green">SIGN IN </Button>
- <Text padding="15px">Forgot Your Password?</Text> 
+<Button   size='sm'
+ height='48px'
+ width='150px'
+ border='2px'
+ borderColor='green.500' colorScheme="green" onClick={handleClick}>SIGN IN </Button>
+<Text padding="15px" cursor={"pointer"}>Forgot Your Password?</Text> 
 </Flex>
-          
-      </Box>
-       {/* <Box border={'2px solid #dd2985'} w={{base : '90%', md : '60%', lg : '40%'}}  m='auto' mt='5%' padding='10px'>
-            <Text fontSize={{base : '19px', md : '22px'}} fontWeight='550'>Shipped To,</Text>
-            <Box fontSize={{base : '14px', md : '16px'}} lineHeight='35px'>
-                <Text>Name : </Text>
-                <Text>Address : </Text>
-                <Text>Country : </Text>
-                <Text>Phone : </Text>
-            </Box>
-             <AlertDialogExample data={data}/>
-         </Box> */}
+         
+     </Box>
+      {/* <Box border={'2px solid #dd2985'} w={{base : '90%', md : '60%', lg : '40%'}}  m='auto' mt='5%' padding='10px'>
+           <Text fontSize={{base : '19px', md : '22px'}} fontWeight='550'>Shipped To,</Text>
+           <Box fontSize={{base : '14px', md : '16px'}} lineHeight='35px'>
+               <Text>Name : </Text>
+               <Text>Address : </Text>
+               <Text>Country : </Text>
+               <Text>Phone : </Text>
+           </Box>
+            <AlertDialogExample data={data}/>
+        </Box> */}
 
-<Box border={'2px solid #dd2985'} w={{base : '90%', md : '60%', lg : '40%'}}  m='auto' mt='5%' height="462px" padding='30px' w={{base : '100%', md :'60%', lg : '70%'}}>
-          <Text  fontSize='2xl'>NEW CUSTOMERS</Text>
+<Box border={'2px solid #dd2985'} w={{base : '90%', md : '60%', lg : '40%'}}  m='auto' mt='5%' height="100%" padding='30px' w={{base : '100%', md :'60%', lg : '70%'}}>
+         <Text  fontSize='2xl'>NEW CUSTOMERS</Text>
 
-          <Divider/>
-          <br /><br />
-          <Text>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</Text>
-          <br />
+         <Divider/>
+         <br /><br />
+         <Text>Creating an account has many benefits: check out faster, keep more than one address, track orders and more.</Text>
+         <br />
 
-          
-          <br />
+         
+         <br />
 <Flex>
- <Button   size='sm'
-  height='48px'
-  width='250px'
-  border='2px'
-  borderColor='green.500' colorScheme="green">CREATE AN ACCOUNT </Button>
- 
+<Button   size='sm'
+ height='48px'
+ width='250px'
+ border='2px'
+ borderColor='green.500' colorScheme="green" onClick={handleCreate}>CREATE AN ACCOUNT </Button>
+
 </Flex>
-          
-      </Box>
-    </Flex>
+         
+     </Box>
+   </Flex>
+   </Box>
       {/* <PaymentPage data={FormData}/> */}
   </>
   )

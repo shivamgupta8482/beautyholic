@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text,Button } from "@chakra-ui/react";
+import { useNavigate } from 'react-router-dom';
 
 const SignUpform = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  // const navigate = useNavigate();
+   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [phoneNo, setPhoneNo] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
+  const [success,setSuccess]=useState(false);
 
 const data = {
   first_name:name,
@@ -23,7 +25,7 @@ const data = {
 
 
   const postdata = (data) => {
-    fetch('http://localhost:8080/signup', {
+    fetch('http://localhost:5000/customer/register', {
   method: 'POST', // or 'PUT'
   headers: {
     'Content-Type': 'application/json',
@@ -33,11 +35,12 @@ const data = {
   .then((response) => response.json())
   .then((data) => {
   // console.log(data);
-   if(data.message=="user already present"){
+   if(data.message=="User Already Exist"){
 alert("user is already present")
    }
-   else if(data.message=="sign up successful") {
-    alert("signup succesful")
+   else if(data.message=="Signup Successful") {
+    alert("signup succesful");
+   setSuccess(true);
    }
 
   
@@ -58,15 +61,6 @@ alert("user is already present")
 
 
 
-
-
-
-
-
-
-
-
-
 const handleClick=()=>{
   if(email && password && name && userName && userName && phoneNo && confirmpassword && password!=confirmpassword){
     alert("password and confirm password not matches");
@@ -75,8 +69,11 @@ const handleClick=()=>{
     setConfirmpassword("");
   }
   else if(email && password && name && userName && userName && phoneNo && confirmpassword && password==confirmpassword){
-  console.log(1);
-  alert("sign up successfull")
+ postdata(data)
+ console.log(success);
+ if(setSuccess){
+  navigate("/login");
+ }
   setEmail("");
   setName("");
   setPassword("");
