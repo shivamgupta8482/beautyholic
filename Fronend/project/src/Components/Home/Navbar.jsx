@@ -22,7 +22,7 @@ export default function Navbar ( ){
           
             <Flex w={{base : '50%', md : '50%' , lg : '55%'}} >
                 <Box display='flex' gap='10px' w={{base : '50%', md : '50%' , lg : '55%'}} alignItems='center'>
-                <select id="categoryDropDown">
+                <select className="categoryDropDown">
               <option value="All Categories">All Categories</option>
               <option value="3">- - Makeup</option>
               <option value="8">- - - - Face</option>
@@ -221,17 +221,17 @@ export default function Navbar ( ){
                      </Tooltip>  
                 </Flex>
                 <Box>
-                <div id="toprightCorner">
+                <div className="toprightCorner">
                 <div>
-                <button id="heart"><i class="fa-solid fa-heart"></i></button>
+                <button className="heart"><i className="fa-solid fa-heart"></i></button>
                 </div>
-                <div id="signupbuttoncorner">
+                <div classNameassName="signupbuttoncorner">
                 <div>
-                    <button id="personlogo" onclick="singOpFunction()">
-                    <i class="fa-solid fa-user"></i>
+                    <button className="personlogo" onclick="singOpFunction()">
+                    <i className="fa-solid fa-user"></i>
                     </button>
                 </div>
-                <div id="text">My Account</div>
+                <div className="text">My Account</div>
                 </div>
                 </div>
                 </Box>
