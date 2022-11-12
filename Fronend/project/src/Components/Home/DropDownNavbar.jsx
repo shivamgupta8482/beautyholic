@@ -1,23 +1,38 @@
+import { useColorMode, Switch, Flex, Button, IconButton, Box, Heading, Text } from '@chakra-ui/react';
+import { useState } from 'react';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import NextLink from "next/link"
 
-import React from 'react'
+function DropDownNavbar(){
+    const {colorMode, toggleColorMode} = useColorMode();
+    const isDark = colorMode === "dark"
+    const [display, changeDisplay] = useState("none")
 
-
-function DropDownNavbar() {
-  const [show, setShow] = React.useState(false)
-  // const { isOpen, onOpen, onClose } = useDisclosure()
-  
-
-
-  return (
-          <div class="navbar">
-      <div class="dropdown">
-        <button class="dropbtn">
-          MAKEUP
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <div class="row">
-            <div class="column">
+    return(
+        <Box w="100%" bg="#dd0285">
+      <Flex 
+      // pos="fixed"
+      top="1rem"
+      w="100%"
+    //   right="1rem"
+      align="center"
+      >
+        <Flex
+          display={['none','none','flex','flex']}
+          className="navbar"
+        >
+          <Box className="dropdown" >
+            <Button
+              as="a"
+              variant="ghost"
+              aria-label="Home"
+              my={5}
+              w="100%">
+              MAKEUP
+            </Button>
+            <Box className="dropdown-content">
+          <Box className="row">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>FACE</h5>
               <br/>
@@ -36,7 +51,7 @@ function DropDownNavbar() {
               <a href="#">Makeup Remover </a>
               <a href="#">Setting Spray </a>
             </div>
-            <div class="column">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>EYE</h5>
               <br/>
@@ -53,7 +68,7 @@ function DropDownNavbar() {
               <a href="#"> Mascara </a>
               <a href="#"> Under Eye Concealer </a>
             </div>
-            <div class="column">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>LIPS</h5>
               <br/>
@@ -67,7 +82,7 @@ function DropDownNavbar() {
               <a href="#">Lip Stain</a>
             </div>
 
-            <div class="column">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>NAILS</h5>
               <br/>
@@ -78,7 +93,7 @@ function DropDownNavbar() {
               <a href="#">Nail Art Kits</a>
               <a href="#">Nail Polish Remover</a>
             </div>
-            <div class="column">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>TOOL BRUSHES</h5>
               <br/>
@@ -92,18 +107,23 @@ function DropDownNavbar() {
               <a href="#">Sponges & Applicators</a>
               <a href="#">Sharpeners</a>
               <a href="#">Tweezers</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">
-          SKIN
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <div class="row">
-            <div class="column">
+            </div>            
+          </Box>
+        </Box>
+          </Box>
+
+          <Box className="dropdown" >
+            <Button
+              as="a"
+              variant="ghost"
+              aria-label="Home"
+              my={5}
+              w="100%">
+              SKIN
+            </Button>
+            <Box className="dropdown-content">
+          <Box className="row">
+          <div className="column">
             <br/>
               <h5 className='dropdown-heading'>EYE CARE</h5>
               <br/>
@@ -116,7 +136,7 @@ function DropDownNavbar() {
               <a href="#">Under Eye Creams </a>
               <a href="#">Under Eye Wrinkles</a>
             </div>
-            <div class="column">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>FACE CARE</h5>
               <br/>
@@ -134,7 +154,7 @@ function DropDownNavbar() {
               <a href="#">Serum</a>
               <a href="#">Toner & Astringents</a>
             </div>
-            <div class="column">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>BODY CARE</h5>
               <br/>
@@ -154,21 +174,25 @@ function DropDownNavbar() {
               <a href="#"> Neck Creams</a>
             </div>
 
-            <div class="column">
+            <div className="column">
               <h5><img width="800px" src="https://www.beautybebo.com/pub/media/mega-menu/SKIN_cATA.jpg" alt="" /></h5>
             </div>
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+          </Box>
 
-      <div class="dropdown">
-        <button class="dropbtn">
-          HAIR
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <div class="row">
-            <div class="column">
+          <Box className="dropdown" >
+            <Button
+              as="a"
+              variant="ghost"
+              aria-label="Home"
+              my={5}
+              w="100%">
+              HAIR
+            </Button>
+            <Box className="dropdown-content">
+          <Box className="row">
+          <div className="column">
             <br/>
               <h5 className='dropdown-heading'>HAIR CARE</h5>
               <br/>
@@ -183,7 +207,7 @@ function DropDownNavbar() {
               <a href="#">Hairfall & Thinning </a>
               <a href="#">Straighteners </a>
             </div>
-            <div class="column">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>HAIR LOSS</h5>
               <br/>
@@ -193,21 +217,24 @@ function DropDownNavbar() {
               <a href="#"> Hair Growth Solutions </a>
               <a href="#"> Shampoo </a>
             </div>
-            <div class="column">
+            <div className="column">
               <h5><img width="1000px" src="https://www.beautybebo.com/pub/media/mega-menu/hair_cata.jpg" alt="" /></h5>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">
-          PERSONAL CARE
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <div class="row">
-            <div class="column">
+            </div>  
+          </Box>
+        </Box>
+          </Box>
+          <Box className="dropdown" >
+            <Button
+              as="a"
+              variant="ghost"
+              aria-label="Home"
+              my={5}
+              w="100%">
+              PERSONAL CARE
+            </Button>
+            <Box className="dropdown-content">
+          <Box className="row">
+          <div className="column">
             <br/>
               <h5 className='dropdown-heading'>BATH & BODY</h5>
               <br/>
@@ -220,7 +247,7 @@ function DropDownNavbar() {
               <a href="#">Scrubs & Exfoliants </a>
               <a href="#">Ubtan & Face Packs</a>
             </div>
-            <div class="column">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>BATHING ACCESSORIES</h5>
               <br/>
@@ -229,7 +256,7 @@ function DropDownNavbar() {
               <a href="#"> Shower Caps </a>
               <a href="#"> Sponges </a>
             </div>
-            <div class="column">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>BATH & SHOWER</h5>
               <br/>
@@ -237,20 +264,24 @@ function DropDownNavbar() {
               <a href="#"> Shower Ge </a>
               <a href="#"> Shower Caps </a>
             </div>
-            <div class="column">
+            <div className="column">
               <h5><img width="700px" src="https://www.beautybebo.com/pub/media/mega-menu/personal_cata.jpg" alt="" /></h5>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">
-          MOMS &BABY CARE
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <div class="row">
-            <div class="column">
+          </Box>
+        </Box>
+          </Box>
+          <Box className="dropdown" >
+            <Button
+              as="a"
+              variant="ghost"
+              aria-label="Home"
+              my={5}
+              w="100%">
+              MOMS &BABY CARE
+            </Button>
+            <Box className="dropdown-content">
+          <Box className="row">
+          <div className="column">
             <br/>
               <h5 className='dropdown-heading'>BABY CARE</h5>
               <br/>
@@ -266,27 +297,31 @@ function DropDownNavbar() {
               <a href="#">Rash Cream</a>
               <a href="#">Wipes</a>
             </div>
-            <div class="column">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>MOM CARE</h5>
               <br/>
               <a href="#"> Lotions & Creams </a>
               <a href="#"> Personal Care </a>
             </div>
-            <div class="column">
+            <div className="column">
               <h5><img width="1000px" src="https://www.beautybebo.com/pub/media/mega-menu/mom_baby_cata.jpg" alt="" /></h5>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">
-          FRAGRANCE
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <div class="row">
-            <div class="column">
+          </Box>
+        </Box>
+          </Box>
+          <Box className="dropdown" >
+            <Button
+              as="a"
+              variant="ghost"
+              aria-label="Home"
+              my={5}
+              w="100%">
+              FRAGRANCE
+            </Button>
+            <Box className="dropdown-content">
+          <Box className="row">
+          <div className="column">
             <br/>
               <h5 className='dropdown-heading'></h5>
               <br/>
@@ -294,21 +329,24 @@ function DropDownNavbar() {
               <a href="#">Deodorants roll ons</a>
               <a href="#">Body Mist/Spray</a>
             </div>
-            <div class="column">
+            <div className="column">
               <h5><img width="300px" src="https://github.com/Harshitmax2022/beauty-bebo/blob/master/toppic4.jpg?raw=true" alt="" /></h5>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">
-          AYURVEDA
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <div class="row">
-            <div class="column">
+          </Box>
+        </Box>
+          </Box>
+          <Box className="dropdown" >
+            <Button
+              as="a"
+              variant="ghost"
+              aria-label="Home"
+              my={5}
+              w="100%">
+              AYURVEDA
+            </Button>
+            <Box className="dropdown-content">
+          <Box className="row">
+          <div className="column">
             <br/>
               <h5 className='dropdown-heading'>NATURAL SKIN CARE</h5>
               <br/>
@@ -326,7 +364,7 @@ function DropDownNavbar() {
               <a href="#">Scrub</a>
               <a href="#">Sun Protection</a>
             </div>
-            <div class="column">
+            <div className="column">
             <br/>
               <h5 className='dropdown-heading'>ATURAL HAIR CARE</h5>
               <br/>
@@ -336,25 +374,28 @@ function DropDownNavbar() {
               <a href="#"> Hair Gel</a>
               <a href="#"> Shampoo</a>
             </div>
-            <div class="column">
+            <div className="column">
               <h5><img width="1000px" src="https://www.beautybebo.com/pub/media/mega-menu/ayurveda_cata.jpg" alt="" /></h5>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="dropdown">
-        <button class="dropbtn">
-          BRANDS
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <div class="brands">
+          </Box>
+        </Box>
+          </Box>
+          <Box className="dropdown" >
+            <Button
+              as="a"
+              variant="ghost"
+              aria-label="Home"
+              my={5}
+              w="100%">
+              BRANDS
+            </Button>
+            <Box className="dropdown-content">
+            <div className="brands">
             <h3>Top Brands</h3>
             <h3>View All</h3>
           </div>
-          <div class="row brands">
-            <div class="column extra">
+          <div className="row brands">
+            <div className="column extra">
               <div className="bransformation">
                 <div>LAKME</div>
                 <div>lOREAL-PARIS</div>
@@ -371,10 +412,139 @@ function DropDownNavbar() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  )
+        </Box>
+          </Box>
+        </Flex>
+
+        <Flex marginLeft="10px">
+        <IconButton 
+          aria-label='Open Menu'
+          size = "lg"
+          mr={2}
+          icon={<HamburgerIcon />}
+          display={['flex','flex','none','none']}
+          onClick ={() => changeDisplay('flex')}
+        />
+        </Flex>
+      </Flex>
+
+      <Flex
+        w="100vw"
+        backgroundColor="transparent"
+        color="black"
+        zIndex={20}
+        h="100vh"
+        pos="fixed"
+        top="0"
+        left="0"
+        overflow="auto"
+        flexDir="column"
+        display={display}
+      >
+        <Flex justify="flex-end">
+            <IconButton 
+            mt={2}
+            mr={2}
+            aria-label="Close Menu"
+            size="lg"
+            color="black"
+            icon={<CloseIcon />}
+            onClick ={() => changeDisplay('none')}
+            />
+        </Flex>
+        <Flex
+          flexDir="column"
+          bgColor="white"
+          pb="50px"
+        >
+          <NextLink href="/" passHref>
+            <Button
+              as="a"
+              _hover={{border:"1px solid black"}}
+              border="1px solid #D3D3D3"
+              variant="ghost"
+              aria-label="Home"
+              my={3}
+              w="100%">MAKEUP
+            </Button>
+          </NextLink>
+
+          <NextLink href="/about" passHref>
+            <Button
+              as="a"
+              _hover={{border:"1px solid black"}}
+              border="1px solid #D3D3D3"
+              variant="ghost"
+              aria-label="Home"
+              my={3}
+              w="100%">SKIN
+            </Button>
+          </NextLink>
+
+          <NextLink href="/product" passHref>
+            <Button
+              as="a"
+              _hover={{border:"1px solid black"}}
+              border="1px solid #D3D3D3"
+              variant="ghost"
+              aria-label="Home"
+              my={3}
+              w="100%">HAIR
+            </Button>
+          </NextLink>
+          <NextLink href="/product" passHref>
+            <Button
+              as="a"
+              _hover={{border:"1px solid black"}}
+              border="1px solid #D3D3D3"
+              variant="ghost"
+              aria-label="Home"
+              my={3}
+              w="100%">PERSONAL CARE
+            </Button>
+          </NextLink>
+          <NextLink href="/product" passHref>
+            <Button
+              as="a"
+              _hover={{border:"1px solid black"}}
+              border="1px solid #D3D3D3"
+              variant="ghost"
+              aria-label="Home"
+              my={3}
+              w="100%">MOMS &BABY CARE
+            </Button>
+          </NextLink>
+          <NextLink href="/product" passHref>
+            <Button
+              as="a"
+              _hover={{border:"1px solid black"}}
+              border="1px solid #D3D3D3"
+              variant="ghost"
+              aria-label="Home"
+              my={3}
+              w="100%">FRAGRANCE
+            </Button>
+          </NextLink>
+          <NextLink href="/product" passHref>
+            <Button
+              as="a"
+              _hover={{border:"1px solid black"}}
+              border="1px solid #D3D3D3"
+              variant="ghost"
+              aria-label="Home"
+              my={5}
+              w="100%">AYURVEDA
+            </Button>
+          </NextLink>
+        </Flex>
+    
+        </Flex>
+
+      </Box>
+
+      
+    )
 }
 
 export default DropDownNavbar;
+

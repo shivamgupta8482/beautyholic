@@ -17,7 +17,7 @@ import WelcomeToBeautyProducts from '../Components/Home/WelcomeToBeautyProducts'
 function Home() {
 
   return (
-    <div name="home">
+    <div name="home" w="100%">
         <Navbar/>
         <DropDownNavbar/>
         <Sidebar/>

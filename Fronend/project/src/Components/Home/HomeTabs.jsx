@@ -4,7 +4,7 @@ import { Box, Heading, Image, Tab, TabList, TabPanel, TabPanels, Tabs, Text } fr
 
 export default function HomeTabs ( ){
     return (
-        <>
+        <div w="80%">
         <Tabs w={{base : '100%', md :'85%'}}  m='auto' mt='3%' colorScheme={'pink'}>
             <TabList className="HomeTablist">
                 <Tab w={'25%'} _hover={{backgroundColor:"#D3D3D3"}} >
@@ -78,6 +78,6 @@ export default function HomeTabs ( ){
                     </TabPanel>
                 </TabPanels>
          </Tabs>
-        </>
+        </div>
     )
 }

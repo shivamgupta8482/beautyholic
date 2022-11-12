@@ -35,11 +35,11 @@ export default function Slideshow() {
 
   return (
     <>
-        <Container className="slideshow" maxW={{base : '100%', md : '80%', lg : '100%'}}>
-        <div className="slideshowSlider"  style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }} >
+        <Container className="slideshow" maxW={{base : '200%', md : '80%', lg : '100%'}}>
+        <div className="slideshowSlider"  style={{ transform: `translate3d(${-index * 100}%, 0, 0)`}} >
             {colors.map((elem, index) => (
             <div className="slide" key={elem.id}>
-               <Link to={elem.Link}><Image shadow='lg' m='auto' src={elem.img} w={{base : '100%', md :'100%'}}/></Link>
+               <Link to={elem.Link}><Image shadow='lg' m='auto' src={elem.img} w={{base : '100%', md :'100%', lg:"100%"}}/></Link>
             </div>
             ))}
         </div>

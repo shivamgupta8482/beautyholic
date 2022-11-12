@@ -1,4 +1,5 @@
 import {Box, Button, Flex, Image, Input, Text, Tooltip} from '@chakra-ui/react'
+import { Show, Hide } from '@chakra-ui/react'
 import {FaSearch} from 'react-icons/fa'
 import {BsCartCheck} from 'react-icons/bs'
 import {Link} from 'react-router-dom'
@@ -15,14 +16,14 @@ export default function Navbar ( ){
             <Image boxSize='100%' m='auto' src='https://www.beautybebo.com/pub/media/ads/ad-desktop.jpg'/>
         </Box>
 
-        <Box bg='white'>
+        <Flex bg='white'>
             <Flex className='MiddleNavFlex' w={{base : '100%', md : '90%', lg : '90%'}} p='10px' bg='white'> 
-           <Box  w={{base : '20%', md : '20%', lg : '20%'}}>
-                <Image ml="20px" w={{base : '70px', md : '100px' , lg : '120px'}} h={{base : '50px', md : '100px' , lg : '80px'}}  src={BeautyHolic}/>
+           <Box  w={{base : '20%', md : '20%', lg : '20%'}} ml="-15px">
+                <Image ml="20px" w={{base : '120px', md : '100px' , lg : '120px'}} h={{base : '50px', md : '100px' , lg : '80px'}}  src={BeautyHolic}/>
             </Box>
           
             <Flex w={{base : '50%', md : '50%' , lg : '55%'}} >
-                <Box display='flex' gap='10px' w={{base : '50%', md : '50%' , lg : '55%'}} alignItems='center'>
+            <Hide below='sm'><Box display='flex' gap='10px' w={{base : '2%', md : '50%' , lg : '55%'}} alignItems='center'>
                 <select className="categoryDropDown">
               <option value="All Categories">All Categories</option>
               <option value="3">- - Makeup</option>
@@ -208,11 +209,11 @@ export default function Navbar ( ){
               <option value="206">- - Latest Offer</option>
             </select>
 
-                </Box>
-                <Box display='flex' gap='10px' w={{base : '50%', md : '50%' , lg : '55%'}} alignItems='center'>
+                </Box></Hide>
+                <Hide below='sm'><Box display='flex' gap='10px' w={{base : '100%', md : '50%' , lg : '55%'}} alignItems='center'>
                     <Input placeholder='Search' h={{base : '25px', md : '40px'}} fontSize={{base : '10px', md : '14px'}}/>
                 <Box className='searchBtn' p={{base : '1px', md :'5px'}} _hover={{color : '#dd2985', cursor : 'pointer'}}><FaSearch/></Box>
-                </Box>
+                </Box></Hide>
             </Flex>
 
                 <Flex  gap={{base : '15px', md : '15px' , lg : '20px'}} alignItems={'center'} justifyContent='center'  w={{base : '18%', md : '20%' , lg : '15%'}}>
@@ -235,7 +236,11 @@ export default function Navbar ( ){
                 </div>
                 </Box>
             </Flex>
-        </Box>
+        </Flex>
+        <Show below='sm'><Box display='flex' mb='10px' w={{base : '100%', md : '50%' , lg : '55%'}} alignItems='center'>
+                    <Input placeholder='Search'ml="5%" w={{base : '80%', md : '40px'}} h={{base : '32px', md : '40px'}} fontSize={{base : '10px', md : '14px'}}/>
+                <Box className='searchBtn' bg="#c60277" color="white" w={{base:"30px"}} h={{base:"30px"}} textAlign="center" pt={{base : '7px', md :'5px'}} pl={{base : '7px', md :'5px'}} _hover={{color : '#dd2985', cursor : 'pointer'}}><FaSearch/></Box>
+                </Box></Show>
         </div>
         </>
     );
