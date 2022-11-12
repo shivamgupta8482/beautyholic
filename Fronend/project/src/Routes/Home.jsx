@@ -18,8 +18,8 @@ function Home() {
 
   return (
     <div name="home">
-        <Navbar/>
-        <DropDownNavbar/>
+        {/* <Navbar/>
+        <DropDownNavbar/> */}
         <Sidebar/>
         <Banner1/>
         <HotDeal/>

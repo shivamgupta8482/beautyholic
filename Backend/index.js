@@ -5,7 +5,12 @@ const { connection } = require("./Config/db");
 require("dotenv").config();
 
 const customerRouter = require("./Routes/user.route");
+
+// const {adminController} = require("./Routes/admin.route");
+const {productController} = require("./Routes/product.route");
+
 const cartRouter = require("./Routes/cart.route");
+
 
 const app = express();
 
@@ -18,6 +23,10 @@ app.get("/", (req, res) => {
 
 app.use("/customer", customerRouter);
 app.use("/cart", cartRouter);
+
+// app.use("/admin", adminController );
+
+app.use("/products", productController );
 
 app.listen(process.env.PORT, async () => {
   try {
