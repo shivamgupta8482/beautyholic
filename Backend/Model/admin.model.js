@@ -24,6 +24,7 @@
 //   product_api_url:{ type: String } ,
 //   api_featured_image: { type: String },
 //   product_colors: { type: Array }
+// userId:{type:Array}
  
 // });
 
