@@ -1,21 +1,28 @@
+
+
+
 import React from 'react'
-import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text,Button,Center,Heading } from "@chakra-ui/react";
+import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text,Button,Center,Heading, AlertDialogCloseButton } from "@chakra-ui/react";
 import GoogleSign from '../Components/SignUp/GoogleSign';
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import {useDispatch} from "react-redux"
 import { login } from '../Redux/AuthReducer/action';
+import { useToast } from '@chakra-ui/react';
+import { useSelector } from 'react-redux';
+import { Signigfun } from "../Redux/AuthReducer/action";
 
 const Loginpage = () => {
 
 //local states--------------------------------------------------------------------------------------------------
 const [email,setEmail] =useState("");
 const [password,setPassword] = useState("");
-const [message,setMessage]=useState([]);
+const [msg,setMsg]=useState("");
 
 
 const dispatch = useDispatch();
 const navigate =useNavigate();
+const toast=useToast();
 
 
 //-------------------------------------------------------------------------------------------------------------
@@ -38,39 +45,150 @@ const handleCreate=()=>{
   navigate("/signup");
 }
 //---------------------------------------------------------------------------------------------------------------
-const handleClick=()=>{
+// const handleClick=()=>{
+  
+//   let loginData = {
+//     email: email,
+//     password: password,
+//   };
+//   let loggeduser = loginData.email;
+//   if (email && password) {
+//     dispatch(login(loginData))
+//     .then(r =>
+//       console.log(r),
+//        navigate('/', { state: loggeduser })  
+//     )
+// //     if(message.message=="Login Successful"){
+// //       setEmail("")
+// //       setPassword("")
+// //       alert("login successful");
+   
+// //     }else if(message.message=="User not exists"){
+// //       setEmail("")
+// //       setPassword("")
+// //       alert("inalid credentials");
+// //     //  setEmail(""),
+// // //setPassword("")
+// //     }
+// //    setMessage([]);
+//   }else{
+//     alert("fill all fields");
+//   }
+ 
+  
+// }
+
+
+// let isAuth = useSelector((data) => data.AuthReducer.isAuth);
+
+
+// let isError = useSelector((data) => data.AuthReducer.isError);
+
+// let errorData = useSelector((data) => data.AuthReducer.errorData);
+
+
+
+// const toast = useToast();
+// function SendSignInRequest() {
+  
+  
+//   if(email && password){
+//     dispatch(Signigfun({ email: email, password: password }));
+//     setEmail("");
+//     setPassword("");
+//   }else{
+//     alert("fill all details");
+//   }
+//  console.log(isAuth);
+// }
+
+// useEffect(() => {
+//   if (isAuth === true) {
+//     toast({
+//       title: `Login Successfull`,
+//       status: "success",
+//       duration: 900,
+//       position: "top",
+//       isClosable: true,
+//     });
+//      alert("Sign in succesful");
+//     setTimeout(() => {
+//       navigate("/");
+//     }, 2000);
+
+//   }
+// }, [isAuth]);
+
+const isauth =useSelector(data=>(data.AuthReducer.payload)); 
+
+const SendSignInRequest = e => {
+  e.preventDefault();
   let loginData = {
     email: email,
     password: password,
   };
-  //let loggeduser = loginData.username;
+  let loggeduser = loginData.email;
   if (email && password) {
-    dispatch(login(loginData)).then(r =>
-      setMessage(r.payload)
-      // navigate('/', { state: loggeduser })  
-    )
-    if(message.message=="Login Successful"){
-      alert("login successful");
-     // setEmail(""),
-//setPassword("")
-    }else if(message.message=="User not exists"){
-      alert("inalid credentials");
-    //  setEmail(""),
-//setPassword("")
+    setMsg("");
+     dispatch(login(loginData))
+   .then( r=>{
+    console.log(r.payload)
+    if(r.payload.message=="Login Successful"){
+      toast({
+              title: `Login Successfull`,
+              status: "success",
+              duration: 900,
+              position: "top",
+              isClosable: true,
+            });
+            setTimeout(() => {
+                    navigate("/");
+                  }, 1000);
+    }else if(r.payload.message=="User not exists"){
+      toast({
+        title: `Sign Up First`,
+        status: "error",
+        duration: 900,
+        position: "top",
+        isClosable: true,
+      });
+      setTimeout(() => {
+              navigate("/signup");
+            }, 1000);
+    }else if(r.payload.message=="Invalid Credentials"){
+      toast({
+        title: `Invalid Crediantials`,
+        status: "error",
+        duration: 900,
+        position: "top",
+        isClosable: true,
+      });
     }
+    handlesetData();
+   })
    
   }else{
-    alert("fill all fields");
+    return false
   }
- 
   
+  
+};
+const handlesetData=async()=>{
+setEmail("");
+setPassword("");
+// if(isauth.message=="Login Successful"){
+// alert("Login n successful");
+// console.log(isauth.message);
+// }
+// else if(isauth.message=="User not exists"){
+//   alert("user not found");
+// }
+//console.log(isauth);
 }
-
-
-
 
   return (
     <>
+
     
     <Box h={{base : '110px', md : '155px', lg : '220px'}}></Box>
    {
@@ -111,7 +229,7 @@ const handleClick=()=>{
 
          <FormControl isRequired mt='20px'>
              <FormLabel>Password</FormLabel>
-             <Input value={password} onChange={(e)=>{setPassword(e.target.value)}} size='lg' mt='10px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='text' name='Fname'  value={FormData.Fname} />
+             <Input value={password} onChange={(e)=>{setPassword(e.target.value)}} size='lg' mt='10px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='text' name='Fname'  />
          </FormControl>
          <br />
 <Flex>
@@ -119,7 +237,7 @@ const handleClick=()=>{
  height='48px'
  width='150px'
  border='2px'
- borderColor='green.500' colorScheme="green" onClick={handleClick}>SIGN IN </Button>
+ borderColor='green.500' colorScheme="green"   onClick={SendSignInRequest}>SIGN IN </Button>
 <Text padding="15px" cursor={"pointer"}>Forgot Your Password?</Text> 
 </Flex>
          
@@ -157,9 +275,10 @@ const handleClick=()=>{
      </Box>
    </Flex>
    </Box>
-      {/* <PaymentPage data={FormData}/> */}
+      {/* <PaymentPage data={FormData}/> Hello*/}
   </>
   )
 }
 
-export default Loginpage
+
+export default Loginpage;
