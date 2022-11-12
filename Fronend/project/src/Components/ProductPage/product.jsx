@@ -5,7 +5,7 @@ import React from "react"
 import { getAudioProjectData,handleFilterAudio,handleSort,filterAudioData,sortAudioData } from "../../Redux/ProductPageRedux/action"
 import { useEffect,useState } from "react"
 import { BiSearch } from 'react-icons/bi'
-import {AiOutlineHeart} from "react-icons/ai"
+import {AiOutlineHeart,AiFillStar} from "react-icons/ai"
 import { NavLink } from "react-router-dom"
 
 import {
@@ -131,7 +131,7 @@ const ProductsPage = () => {
                               <Select w={"120px"} borderRadius="0" onChange={handleSort}>
                                 <option value=''>Sort by</option> 
                                 <option value='asc'>Trending</option>
-                                <option value='desc'>Most Funded</option>
+                                <option value='desc'>Price</option>
                               </Select>
                           </Box>   
                      </Flex>
@@ -150,37 +150,40 @@ const ProductsPage = () => {
 
                                <Link to={`/SingleProductPage/${elem.id}`}>
 
-                                 <Image src={elem.thumbnail} w="100%"/>
+                                 <Image src={elem.image} w="100%"/>
                                  <Box padding={"20px"}>
                                    <Box mb={"10px"}>
                                           <Flex  justifyContent="space-between" gap="10px" alignItems={"center"}>
-                                               <Text fontSize='sm' color="teal">{elem.category}</Text> 
-                                                <AiOutlineHeart /> 
+                                               <Text fontSize='sm' color="teal">{elem.Brand}</Text> 
+                                                
                                           </Flex>
                                    </Box> 
                                    <hr /> 
                                    <Text fontSize='lg' fontWeight="550">{elem.title}</Text>
                                    <p fontWeight="500" style={{fontSize:"13.5px",color:"rgb(122,121,121)",marginBottom:"20px"}}>{elem.features}</p> 
-                                   
-                                   <h3>AUDIO</h3>
+                                   <Flex>
+                                   <AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/><AiFillStar/>
+                                   </Flex>
                                    <Box>
                                        <Flex justifyContent={"space-between"} alignItems={"center"}>
                                            <Box >
-                                                   <h2>{elem.fund}</h2>
-                                                   <p>raised</p>
+                                                   <h2 style={{textDecoration:"line-through"}}>{elem.offerPrice}</h2>
+                                           </Box>
+                                           <Box >
+                                                   <h2>₹{elem.price}</h2>
                                            </Box>
                                            <Box>
-                                             <p>{elem.percentage}%</p>
+                                             <p>{elem.off}%</p>
                                            </Box>
                                        </Flex>
+                                       <Flex>
+                                        <Button colorScheme='red'> Add To Cart</Button>
+                                        <Button><AiOutlineHeart /> </Button>
+                                       </Flex>
+
                                    </Box> 
-                                   <Progress borderRadius={"10px"} colorScheme='green' size='sm' value={elem.percentage} />
-                                    <Box >
-                                     {
-                                       elem.daysLeft === "Now Funding through InDemand" 
-                                     }
-                                     <p>{elem.daysLeft === "Now Funding through InDemand" ? elem.daysLeft: elem.daysLeft + " days left"}</p>
-                                    </Box>
+                                   {/* <Progress borderRadius={"10px"} colorScheme='green' size='sm' value={elem.percentage} /> */}
+                  
                                  </Box>
                                  </Link>
                               </Box>
@@ -313,7 +316,7 @@ const ProductsPage = () => {
                                    <Box>
                                        <Flex justifyContent={"space-between"} alignItems={"center"}>
                                            <Box >
-                                                   <h2>{elem.fund}</h2>
+                                                   <h2>{elem.price}</h2>
                                                    <p>raised</p>
                                            </Box>
                                            <Box>

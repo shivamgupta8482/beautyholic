@@ -15,7 +15,7 @@ export const getAudioProjectData = () => (dispatch) =>{
      
      dispatch({type : GET_AUDIO_PROJECT_DATA_REQUEST}) 
 
-     return axios.get("https://beautyholic.onrender.com/Fashwash")
+     return axios.get("https://beautybebodbjson.onrender.com/Hair")
      .then((res)=>{
         return dispatch({ type : GET_AUDIO_PROJECT_DATA_SUCCESS, payload : res.data })
      })
@@ -28,7 +28,7 @@ export const filterAudioData = (value) =>(dispatch)=>{
 
    dispatch({type : FILTER_AUDIO_PROJECT_DATA_REQUEST}) 
 
-   return axios.get(`https://indiegogo-server.herokuapp.com/audioData?status=${value}`)
+   return axios.get(`https://beautybebodbjson.onrender.com/Hair?status=${value}`)
    .then((res)=>{
       //console.log(res.data)
       return dispatch({ type : FILTER_AUDIO_PROJECT_DATA_SUCCESS, payload : res.data})
@@ -42,7 +42,7 @@ export const filterAudioData = (value) =>(dispatch)=>{
 export const sortAudioData = (value)=>(dispatch) =>{
    dispatch({ type : SORT_AUDIO_DATA_REQUEST}) 
 
-   return axios.get(`https://indiegogo-server.herokuapp.com/audioData?_sort=fund&_order=${value}`)
+   return axios.get(`https://beautybebodbjson.onrender.com/Hair?_sort=fund&_order=${value}`)
    .then((res)=>{
      // console.log("action", res)
      return dispatch({ type : SORT_AUDIO_DATA_SUCCESS, payload : res.data })

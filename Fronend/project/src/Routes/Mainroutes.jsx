@@ -10,6 +10,7 @@ import Productspage from './Productspage';
 import Signup from './Signup';
 import Singleproductpage from './Singleproductpage';
 import Cart from "./Cart"
+import Admin from "./admin"
 
 const Mainroutes = () => {
   return (
@@ -20,9 +21,10 @@ const Mainroutes = () => {
         <Route path='/SingleProductPage/:id' element={<Singleproductpage></Singleproductpage>}></Route>
         <Route path='/Login' element={<Loginpage></Loginpage>}></Route>
         <Route path='/Signup' element={<Signup></Signup>}></Route>
-        <Route path='/PaymentPage/:id' element={<Privateroute><Paymentpage></Paymentpage></Privateroute>}></Route>
+        <Route path='/PaymentPage' element={<Paymentpage></Paymentpage>}></Route>
         <Route path='/Cart' element={<Cart />}></Route>
         <Route path='/CheckoutPage' element={<Checkoutpage></Checkoutpage>}></Route>
+        <Route path='/admin' element={<Admin />}></Route>
        
     </Routes>
     </div>

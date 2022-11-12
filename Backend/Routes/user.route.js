@@ -11,7 +11,7 @@ customerRouter.post("/register", (req, res) => {
   const { first_name, last_name, email, password, phone } = req.body;
   bcrypt.hash(password, 6, async function (err, hash) {
     if (err) {
-      return res.send("Please Try Again");
+      return res.send({message:"Please Try Again"});
     }
     const exist_user = await customerModel.findOne({ email });
     if (!exist_user) {
@@ -23,9 +23,9 @@ customerRouter.post("/register", (req, res) => {
         phone,
       });
       user.save();
-      res.send("Signup Successful");
+      res.send({message:"Signup Successful"});
     } else {
-      res.send("User Already Exist");
+      res.send({message:"User Already Exist"});
     }
   });
 });
@@ -34,7 +34,7 @@ customerRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const user = await customerModel.findOne({ email });
   if (!user) {
-    return res.send("Invalid Credentials");
+    return res.send({ message: "User not exists" });
   }
   const hashed_password = user.password;
   bcrypt.compare(password, hashed_password, async function (err, result) {
@@ -43,9 +43,9 @@ customerRouter.post("/login", async (req, res) => {
         { email: user.email, userId: user._id },
         process.env.jwt_secret_key
       );
-      return res.send({ massage: "Login Successful", token: token });
+      return res.send({ message: "Login Successful", token: token });
     } else {
-      return res.send("Invalid Credentials");
+      return res.send({ message: "Invalid Credentials" });
     }
   });
 });

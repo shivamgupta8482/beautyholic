@@ -17,6 +17,19 @@ import GoogleSign from "../Components/SignUp/GoogleSign";
 import { useState, useEffect } from "react";
 
 const Loginpage = () => {
+
+//local states--------------------------------------------------------------------------------------------------
+const [email,setEmail] =useState("");
+const [password,setPassword] = useState("");
+const [message,setMessage]=useState([]);
+
+
+const dispatch = useDispatch();
+const navigate =useNavigate();
+
+
+//-------------------------------------------------------------------------------------------------------------
+//usemedia hook------------------------------------------------------------------------------------------------
   const [isDesktop, setDesktop] = useState(window.innerWidth > 1050);
 
   const updateMedia = () => {
@@ -27,6 +40,44 @@ const Loginpage = () => {
     window.addEventListener("resize", updateMedia);
     return () => window.removeEventListener("resize", updateMedia);
   });
+
+
+//--------------------------------------------------------------------------------------------------------------
+//handlecreate----------------------------------------------------------------------------------------------
+const handleCreate=()=>{
+  navigate("/signup");
+}
+//---------------------------------------------------------------------------------------------------------------
+const handleClick=()=>{
+  let loginData = {
+    email: email,
+    password: password,
+  };
+  //let loggeduser = loginData.username;
+  if (email && password) {
+    dispatch(login(loginData)).then(r =>
+      setMessage(r.payload)
+      // navigate('/', { state: loggeduser })  
+    )
+    if(message.message=="Login Successful"){
+      alert("login successful");
+     // setEmail(""),
+//setPassword("")
+    }else if(message.message=="User not exists"){
+      alert("inalid credentials");
+    //  setEmail(""),
+//setPassword("")
+    }
+   
+  }else{
+    alert("fill all fields");
+  }
+ 
+  
+}
+
+
+
 
   return (
     <>

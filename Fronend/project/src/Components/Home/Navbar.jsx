@@ -3,7 +3,8 @@ import {FaSearch} from 'react-icons/fa'
 import {BsCartCheck} from 'react-icons/bs'
 import {Link} from 'react-router-dom'
 import { useContext } from 'react'
-import BeautyHolic from "../../Assets/BeautyHolic.png"
+import BeautyHolic from "../../Assets/BeautyHolic.png";
+import {FaUserAlt} from "react-icons/fa";
 // import { CartContext } from '../Context/CartContext'
 export default function Navbar ( ){
     // const {TotalCartPrice,SetTotalCartPrice,CartData} = useContext();
@@ -17,12 +18,12 @@ export default function Navbar ( ){
         <Box bg='white'>
             <Flex className='MiddleNavFlex' w={{base : '100%', md : '90%', lg : '90%'}} p='10px' bg='white'> 
            <Box  w={{base : '20%', md : '20%', lg : '20%'}}>
-                <Image ml="20px" w={{base : '100px', md : '100px' , lg : '120px'}} h={{base : '100px', md : '100px' , lg : '80px'}}  src={BeautyHolic}/>
+                <Image ml="20px" w={{base : '70px', md : '100px' , lg : '120px'}} h={{base : '50px', md : '100px' , lg : '80px'}}  src={BeautyHolic}/>
             </Box>
           
             <Flex w={{base : '50%', md : '50%' , lg : '55%'}} >
                 <Box display='flex' gap='10px' w={{base : '50%', md : '50%' , lg : '55%'}} alignItems='center'>
-                <select id="categoryDropDown">
+                <select className="categoryDropDown">
               <option value="All Categories">All Categories</option>
               <option value="3">- - Makeup</option>
               <option value="8">- - - - Face</option>
@@ -221,18 +222,16 @@ export default function Navbar ( ){
                      </Tooltip>  
                 </Flex>
                 <Box>
-                <div id="toprightCorner">
+                <div className="toprightCorner">
                 <div>
-                <button id="heart"><i class="fa-solid fa-heart"></i></button>
+                <button className="heart"><i className="fa-solid fa-heart"></i></button>
                 </div>
-                <div id="signupbuttoncorner">
-                <div>
-                    <button id="personlogo" onclick="singOpFunction()">
-                    <i class="fa-solid fa-user"></i>
-                    </button>
-                </div>
-                <div id="text">My Account</div>
-                </div>
+                <Flex className="signupbuttoncorner">
+                <Box>
+                    <FaUserAlt/>
+                </Box>
+                < Box className="text">My Account</Box>
+                </Flex>
                 </div>
                 </Box>
             </Flex>
