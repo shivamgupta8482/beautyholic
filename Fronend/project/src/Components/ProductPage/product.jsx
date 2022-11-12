@@ -195,9 +195,11 @@ const ProductsPage = () => {
                                 </Flex>
                                 <br />
                                 <Flex gap="15px">
+                                  <Link to="/cart/create">
                                   <Button colorScheme="pink">
                                     Add To Cart
                                   </Button>
+                                  </Link>
                                   <Button>
                                     <AiOutlineHeart />{" "}
                                   </Button>

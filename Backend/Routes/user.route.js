@@ -11,7 +11,7 @@ customerRouter.post("/register", (req, res) => {
   const { first_name, last_name, email, password, phone } = req.body;
   bcrypt.hash(password, 6, async function (err, hash) {
     if (err) {
-      return res.send({message:"Please Try Again"});
+      return res.send({ message: "Please Try Again" });
     }
     const exist_user = await customerModel.findOne({ email });
     if (!exist_user) {
@@ -23,9 +23,9 @@ customerRouter.post("/register", (req, res) => {
         phone,
       });
       user.save();
-      res.send({message:"Signup Successful"});
+      res.send({ message: "Signup Successful" });
     } else {
-      res.send({message:"User Already Exist"});
+      res.send({ message: "User Already Exist" });
     }
   });
 });
