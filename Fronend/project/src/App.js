@@ -1,12 +1,17 @@
-import "./App.css";
-import Mainroutes from "./Routes/Mainroutes";
-import Footer from "./Components/Footer";
+import './App.css';
+import Mainroutes from './Routes/Mainroutes';
+import Footer from './Components/Footer';
+import Navbar from './Components/Home/Navbar';
+import DropDownNavbar from './Components/Home/DropDownNavbar';
+
 
 function App() {
   return (
     <div className="App">
-      <Mainroutes />
-      <Footer />
+      <Navbar />
+        <DropDownNavbar/>
+    <Mainroutes />
+    <Footer />
     </div>
   );
 }

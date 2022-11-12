@@ -2,12 +2,71 @@ import {Box, Button, Flex, Image, Input, Text, Tooltip} from '@chakra-ui/react'
 import {FaSearch} from 'react-icons/fa'
 import {BsCartCheck} from 'react-icons/bs'
 import {Link} from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import BeautyHolic from "../../Assets/BeautyHolic.png";
 import {FaUserAlt} from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux'
+import { getProjectData } from '../../Redux/ProductPageRedux/action'
+import { useState } from 'react'
 // import { CartContext } from '../Context/CartContext'
 export default function Navbar ( ){
     // const {TotalCartPrice,SetTotalCartPrice,CartData} = useContext();
+  
+  const [products,setProducts]=useState([]);
+  const [search,setSearch] =useState("");
+  const [filter,setFilter]=useState([]);
+  const dispatch = useDispatch();
+    const data = useSelector(data=>data.productPageReducer.audioProjects)
+const handleClick=()=>{
+ // setSearch(e.target.value);
+ //console.log("1");
+  const y =  dispatch(getProjectData()) 
+  y.then((r)=>{
+   setProducts(r.payload);
+  })
+  datafilter();
+  
+}
+
+const datafilter=()=>{
+  const data = products.filter((elem)=>{
+    return(elem.name.toLowerCase().split(" ").join("").includes(search));
+ })
+ setFilter(data);
+ 
+}
+//useMedia Hook-------------------------------------------------------------------------------
+const [isDesktop, setDesktop] = useState(window.innerWidth > 1050);
+
+const updateMedia = () => {
+  setDesktop(window.innerWidth > 1070);
+};
+
+useEffect(() => {
+  window.addEventListener("resize", updateMedia);
+  return () => window.removeEventListener("resize", updateMedia);
+});
+
+
+//-----------------------------------------------------------------------------------------------
+
+useEffect(()=>{
+
+//console.log(products.name)
+//console.log(search);
+
+//setFilter(data);
+//console.log(filter);
+
+
+
+console.log(filter)
+ // console.log(search);
+   // console.log(products);
+  },[filter])
+
+
+
     return (
         <>
         <div className='NavMainDiv'>
@@ -207,13 +266,17 @@ export default function Navbar ( ){
               <option value="201">- - - - - - Conditioner</option>
               <option value="206">- - Latest Offer</option>
             </select>
+            </Box>
+              {
+                isDesktop? 
+                <Box display='flex' gap='10px' w={{base : '100%', md : '120%' , lg : '100%'}} alignItems='center'>
+                    <Input size="lg" onChange={(e)=>{setSearch(e.target.value)}} placeholder='Search' h={{base : '40px', md : '40px'}} fontSize={{base : '10px', md : '14px'}}/>
 
-                </Box>
-                <Box display='flex' gap='10px' w={{base : '50%', md : '50%' , lg : '55%'}} alignItems='center'>
-                    <Input placeholder='Search' h={{base : '25px', md : '40px'}} fontSize={{base : '10px', md : '14px'}}/>
-                <Box className='searchBtn' p={{base : '1px', md :'5px'}} _hover={{color : '#dd2985', cursor : 'pointer'}}><FaSearch/></Box>
-                </Box>
+                <Box className='searchBtn' p={{base : '1px', md :'5px'}} _hover={{color : '#dd2985', cursor : 'pointer'}}  onClick={handleClick}><FaSearch/></Box>
+                </Box>:<></>
+              }
             </Flex>
+          
 
                 <Flex  gap={{base : '15px', md : '15px' , lg : '20px'}} alignItems={'center'} justifyContent='center'  w={{base : '18%', md : '20%' , lg : '15%'}}>
                    <Tooltip ><Button variant='unstyled' size='xsm' fontSize={{base : '14px', md : '16px', lg : '25px'}} _hover={{color : '#dd2985'}}><BsCartCheck/></Button></Tooltip>
@@ -235,6 +298,30 @@ export default function Navbar ( ){
                 </div>
                 </Box>
             </Flex>
+            {
+              search && filter.length!=0 && isDesktop?<Box w={{base : '40%', md : '40%' , lg : '30%'}} ml="35%" mt ="-30px" zIndex={"20"} background="white" height ="400px" overflow="scroll" position="absolute">
+              {
+                     filter.map((elem)=>{
+                        return <Box>
+                        <Flex  mt='20px'>
+                               <Box  width='30%' display='flex' justifyContent='center'>
+                                   <Image m='auto' boxSize={{base : '80px', md :'60px', lg :'50px'}} src={elem.api_featured_image}/>
+                               </Box>
+   
+                               <Box width='50%' fontSize={{base : '12px', md : '12px'}}>
+                               <Text>{elem.name}</Text>
+                               {/* <Text>Brand : {elem.brand}</Text> */}
+                               </Box>
+   
+                               {/* <Box  width='20%' fontSize='14px'>
+                                   <Text>{elem.price.raw}</Text>
+                               </Box> */}
+                           </Flex>
+                        </Box>
+                     })
+                   }
+              </Box>:<></>
+            }
         </Box>
         </div>
         </>
