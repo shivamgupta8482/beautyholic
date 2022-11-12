@@ -9,9 +9,12 @@ import Privateroute from './Privateroute';
 import Productspage from './Productspage';
 import Signup from './Signup';
 import Singleproductpage from './Singleproductpage';
-import Cart from "./Cart"
 import Admin from "./admin"
+
 import Thankyou from './Thankyou';
+
+import Cart from './Cart';
+
 
 const Mainroutes = () => {
   return (
