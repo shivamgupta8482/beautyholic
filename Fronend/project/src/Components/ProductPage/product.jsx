@@ -127,45 +127,55 @@ const ProductsPage = () => {
                   </Box>
                 </Flex>
               </Box>
-              <SimpleGrid minChildWidth="230px" spacing="40px">
+              <SimpleGrid minChildWidth="230px" spacing="20px">
                 {productData.length > 0 &&
                   productData.map((elem) => (
-                    <Wrap spacing="10px">
+                    <Wrap spacing="5px">
                       <WrapItem>
                         <Box
                           key={elem.id}
                           style={{ height: "" }}
                           border="1px solid #e1e1e1"
                           textAlign="left"
+                          overflow="hidden"
+                          padding={"10px"}
+                          width="312px"
+                          class="Productbox"
                         >
                           <Link to={`/SingleProductPage/${elem.id}`}>
-                            <Image src={elem.api_featured_image} w="100%" h="200px" />
-                            <Box padding={"20px"}>
-                              <Box mb={"10px"}>
+                            <Image className="ProductImage" src={elem.api_featured_image} w="100%" h="200px" />
+                            <Box padding={"20px"} >
+                              <Box mb={"10px"}  >
                                 <Flex
                                   justifyContent="space-between"
                                   gap="10px"
                                   alignItems={"center"}
                                 >
-                                  <Text fontSize="sm" color="teal">
+                                  <Text fontSize="sm" color="teal" mt="5px">
                                     {elem.brand}
                                   </Text>
                                 </Flex>
                               </Box>
                               <hr />
-                              <Text fontSize="lg" fontWeight="550">
+                             <Box height="50px">
+                             <Text fontSize="lg" fontWeight="550" className="ProductText" mt="5px">
                                 {elem.name}
                               </Text>
-                              <p
+                             </Box>
+                              {/* <Text fontSize="lg" fontWeight="550">
+                                {elem.description}
+                              </Text> */}
+                              <Text
                                 fontWeight="500"
                                 style={{
                                   fontSize: "13.5px",
                                   color: "rgb(122,121,121)",
-                                  marginBottom: "20px",
+                                  marginBottom: "2px",
                                 }}
+                                mt="5px"
                               >
                                 {elem.features}
-                              </p>
+                              </Text>
                               <Flex>
                                 <AiFillStar />
                                 <AiFillStar />
@@ -183,11 +193,11 @@ const ProductsPage = () => {
                                     <h2
                                       style={{ textDecoration: "line-through" }}
                                     >
-                                      ₹{(elem.price)*75}
+                                      ₹{(elem.price)*75==0?356:(elem.price)*75}
                                     </h2>
                                   </Box>
                                   <Box>
-                                    <h2>₹{((elem.price)*75)*0.88}</h2>
+                                    <h2>₹{((elem.price)*75)*0.88==0?236:((elem.price)*75)*0.88}</h2>
                                   </Box>
                                   <Box>
                                     <p>12%off</p>
