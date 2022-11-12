@@ -134,12 +134,12 @@ const ProductsPage = () => {
                       <WrapItem>
                         <Box
                           key={elem.id}
-                          style={{ height: "600px" }}
+                          style={{ height: "" }}
                           border="1px solid #e1e1e1"
                           textAlign="left"
                         >
                           <Link to={`/SingleProductPage/${elem.id}`}>
-                            <Image src={elem.image} w="100%" />
+                            <Image src={elem.api_featured_image} w="100%" h="200px" />
                             <Box padding={"20px"}>
                               <Box mb={"10px"}>
                                 <Flex
@@ -148,13 +148,13 @@ const ProductsPage = () => {
                                   alignItems={"center"}
                                 >
                                   <Text fontSize="sm" color="teal">
-                                    {elem.Brand}
+                                    {elem.brand}
                                   </Text>
                                 </Flex>
                               </Box>
                               <hr />
                               <Text fontSize="lg" fontWeight="550">
-                                {elem.title}
+                                {elem.name}
                               </Text>
                               <p
                                 fontWeight="500"
@@ -183,14 +183,14 @@ const ProductsPage = () => {
                                     <h2
                                       style={{ textDecoration: "line-through" }}
                                     >
-                                      {elem.offerPrice}
+                                      ₹{(elem.price)*75}
                                     </h2>
                                   </Box>
                                   <Box>
-                                    <h2>₹{elem.price}</h2>
+                                    <h2>₹{((elem.price)*75)*0.88}</h2>
                                   </Box>
                                   <Box>
-                                    <p>{elem.off}%</p>
+                                    <p>12%off</p>
                                   </Box>
                                 </Flex>
                                 <br />
@@ -234,7 +234,7 @@ const ProductsPage = () => {
                           textAlign="left"
                         >
                           <Link to={`/SingleProductPage/${elem.id}`}>
-                            <Image src={elem.image} w="100%" />
+                            <Image src={elem.api_featured_image} w="100%" />
                             <Box padding={"20px"}>
                               <Box mb={"10px"}>
                                 <Flex
@@ -243,13 +243,13 @@ const ProductsPage = () => {
                                   alignItems={"center"}
                                 >
                                   <Text fontSize="sm" color="teal">
-                                    {elem.Brand}
+                                    {elem.brand}
                                   </Text>
                                 </Flex>
                               </Box>
                               <hr />
                               <Text fontSize="lg" fontWeight="550">
-                                {elem.title}
+                                {elem.name}
                               </Text>
                               <p
                                 fontWeight="500"
@@ -271,14 +271,14 @@ const ProductsPage = () => {
                                     <h2
                                       style={{ textDecoration: "line-through" }}
                                     >
-                                      {elem.offerPrice}
+                                     ₹{(elem.price)*75}
                                     </h2>
                                   </Box>
                                   <Box>
-                                    <h2>₹{elem.price}</h2>
+                                    <h2>₹{((elem.price)*75)*0.88}</h2>
                                   </Box>
                                   <Box>
-                                    <p>{elem.off}%</p>
+                                    <p>12%off</p>
                                   </Box>
                                 </Flex>
                                 <Flex gap="10px">

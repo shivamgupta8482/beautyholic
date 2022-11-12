@@ -57,7 +57,7 @@ export const SingleProductpage = () => {
           <Image
             m="auto"
             w={{ base: "200px", md: "300px", lg: "400px" }}
-            src={singlProductData.image}
+            src={singlProductData.api_featured_image}
           />
         </Box>
 
@@ -66,8 +66,9 @@ export const SingleProductpage = () => {
             fontSize={{ base: "14px", md: "16px", lg: "18px" }}
             w={"90%"}
             fontWeight="550"
+            ml="0x"
           >
-            {singlProductData.title}
+            {singlProductData.name}
           </Text>
           <Flex>
             <AiFillStar />
@@ -84,7 +85,7 @@ export const SingleProductpage = () => {
             alignItems="center"
           >
             <TiTick />
-            <Text>{singlProductData.stock}</Text>
+            <Text>stock</Text>
           </Flex>
 
           <Flex
@@ -94,10 +95,10 @@ export const SingleProductpage = () => {
             fontSize={{ base: "12px", md: "16px" }}
           >
             <Text color="gray" textDecoration="line-through">
-              {singlProductData.offerPrice}{" "}
+            ₹{(singlProductData.price)*75}{" "}
             </Text>
-            <Text color="#dd0285">₹{singlProductData.price}</Text>
-            <Text color="green">{singlProductData.off}</Text>
+            <Text color="#dd0285">₹{((singlProductData.price)*75)*0.88}</Text>
+            <Text color="green">12%off</Text>
           </Flex>
           <Text color="grey" fontSize={{ base: "12px", md: "12px" }}>
             (Inclusive of all taxes)

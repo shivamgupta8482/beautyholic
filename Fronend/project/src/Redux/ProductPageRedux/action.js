@@ -15,7 +15,7 @@ export const getProjectData = () => (dispatch) =>{
      
      dispatch({type : GET_PROJECT_DATA_REQUEST}) 
 
-     return axios.get("https://beautybebodbjson.onrender.com/Hair")
+     return axios.get("https://makeup-api.herokuapp.com/api/v1/products.json?product_type=eyebrow")
      .then((res)=>{
         return dispatch({ type : GET_PROJECT_DATA_SUCCESS, payload : res.data })
      })
