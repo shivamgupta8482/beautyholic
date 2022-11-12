@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-
+const authentication =require("./Middlewares/authenticaton")
 const { connection } = require("./Config/db");
 require("dotenv").config();
 
@@ -8,8 +8,9 @@ const customerRouter = require("./Routes/user.route");
 
 // const {adminController} = require("./Routes/admin.route");
 const {productController} = require("./Routes/product.route");
+const {wishListController} = require("./Routes/wishList.route");
+const {addcartController} = require("./Routes/addCart.route");
 
-const cartRouter = require("./Routes/cart.route");
 
 
 const app = express();
@@ -22,11 +23,16 @@ app.get("/", (req, res) => {
 });
 
 app.use("/customer", customerRouter);
-app.use("/cart", cartRouter);
+app.use("/products", productController );
+
+
+app.use(authentication)
+app.use("/wishlist", wishListController);
+app.use(authentication)
+app.use("/addcart", addcartController);
 
 // app.use("/admin", adminController );
 
-app.use("/products", productController );
 
 app.listen(process.env.PORT, async () => {
   try {
