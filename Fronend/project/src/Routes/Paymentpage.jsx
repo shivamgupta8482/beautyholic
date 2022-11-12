@@ -1,7 +1,8 @@
 import React from 'react'
-import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Radio,Select,Text,RadioGroup,Stack, Button,Accordion,AccordionButton,Spacer,Center,Heading,AccordionIcon,AccordionItem,AccordionPanel } from "@chakra-ui/react";
+import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Radio,Select,Text,RadioGroup,Stack, Button,Accordion,AccordionButton,Spacer,Center,Heading,AccordionIcon,AccordionItem,AccordionPanel, useToast } from "@chakra-ui/react";
 
 import { useEffect,useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Paymentpage = () => {
 
@@ -77,8 +78,20 @@ const Paymentpage = () => {
   });
 
 
-
-
+const navigate = useNavigate();
+const toast = useToast();
+const handleSuccess=()=>{
+  toast({
+    title: `Payment Sucessful`,
+    status: "success",
+    duration: 900,
+    position: "top",
+    isClosable: true,
+  });
+  setTimeout(() => {
+          navigate("/ThankYou");
+        }, 1000);
+}
 
   return (
     <>
@@ -100,7 +113,7 @@ const Paymentpage = () => {
 </RadioGroup>
 
 {
-  isDesktop?<Button ml="85%" colorScheme={"green"}>PLACE ORDER</Button>:<Center><Button mt="20px" colorScheme={"green"}>PLACE ORDER</Button></Center>
+  isDesktop?<Button ml="85%" colorScheme={"green"} onClick={handleSuccess}>PLACE ORDER</Button>:<Center><Button mt="20px" colorScheme={"green"}>PLACE ORDER</Button></Center>
 }
     <Divider mt="15px"/>
 
