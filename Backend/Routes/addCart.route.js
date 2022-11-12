@@ -2,16 +2,16 @@ const { Router } = require("express");
 // const bcrypt = require("bcrypt");
 // const jwt = require("jsonwebtoken");
 
-const {wishListModel} = require("../Model/wishList.model");
-const wishListController = Router();
+const {addCartModel} = require("../Model/addCart.model");
+const addcartController = Router();
 
 
-wishListController.get("/", async (req, res) => {
-  const products = await wishListModel.find({userId:req.body.userId});
+addcartController.get("/", async (req, res) => {
+  const products = await addCartModel.find({userId:req.body.userId});
   res.send(products);
 });
 
-wishListController.post("/create", async (req, res) => {
+addcartController.post("/create", async (req, res) => {
     const {
       id,
       brand,
@@ -35,7 +35,7 @@ wishListController.post("/create", async (req, res) => {
         userId
     } = req.body;
   
-    const note = new wishListModel({
+    const note = new addCartModel({
       id,
       brand,
       name,
@@ -67,9 +67,9 @@ wishListController.post("/create", async (req, res) => {
   });
 
 
-  wishListController.delete("/:productId", async (req, res) => {
+  addcartController.delete("/:productId", async (req, res) => {
     const { productId } = req.params;
-    const deleteproduct = await wishListModel.findOneAndDelete({
+    const deleteproduct = await addCartModel.findOneAndDelete({
       _id: productId,
       userId: req.body.userId,
     });
@@ -83,5 +83,5 @@ wishListController.post("/create", async (req, res) => {
 
 
 module.exports = {
-    wishListController
+    addcartController
   };
