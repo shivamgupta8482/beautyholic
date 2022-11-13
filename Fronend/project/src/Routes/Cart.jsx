@@ -25,56 +25,50 @@ import {
 
 import { cartproductdelete, getcartdata } from "../Redux/AuthReducer/action";
 import { useDispatch } from "react-redux";
- import { Link } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+//  import { Link } from "@chakra-ui/react";
+import { useNavigate, Link } from "react-router-dom";
 const Cart = () => {
-  const [data,setData] = useState([]);
-  const [loading,setLoading] = useState(false);
-  const [price,setPrice]=useState(0);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [price, setPrice] = useState(0);
+  //  let data=Array.from(datas);
 
+  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const handleDelete = (id, cost) => {
+    //setPrice(price-cost)
 
+    //  setPrice(prev => prev-cost)
 
-const navigate = useNavigate();
-// const navigate = useNavigate();
-const dispatch = useDispatch();
+    dispatch(cartproductdelete(id)).then((r) => {
+      console.log(r.payload);
+      // setData(r.payload)
+    });
 
-const handleDelete=(id,cost)=>{
-  //setPrice(price-cost)
-  
-  //  setPrice(prev => prev-cost)
-   
-  dispatch(cartproductdelete(id))
-  .then(r=>{
-    console.log(r.payload);
-   // setData(r.payload)
-  })
-  
- setLoading(true);
-}
+    setLoading(true);
+  };
 
+  const homepage = () => {
+    navigate("/");
+  };
 
+  const handleRoute = () => {
+    navigate("/CheckoutPage");
+  };
 
-const handleRoute=()=>{
-  navigate("/CheckoutPage");
-}
+  useEffect(() => {
+    setPrice(0);
+    dispatch(getcartdata()).then((r) => {
+      console.log(r.payload);
+      setData(r.payload);
+      // shippingprice();
+    });
 
-
-useEffect(()=>{
-setPrice(0);
-  dispatch(getcartdata())
-  .then(r=>{
-    console.log(r.payload);
-    setData(r.payload)
-    // shippingprice();
-  })
-
-  const wholeprice=data.map((e)=>(
-      setPrice(prev => prev+e.price)
-     ))
-  setLoading(false);
- 
-},[data && loading])
+    const wholeprice = data.map((e) => setPrice((prev) => prev + e.price));
+    setLoading(false);
+  }, [data && loading]);
 
   const [isDesktop, setDesktop] = useState(window.innerWidth > 1050);
 
@@ -101,56 +95,68 @@ setPrice(0);
           <Text>ITEM</Text>
           <Divider borderWidth="2px" />
 
-         {
-          data.length==0?<></>
-          :<> { data?.map((elem) => {
-            return (
-              <>
-                <Flex mt="20px">
-                  <Box width="30%" justifyContent="center">
-                    <Image
-                      m="auto"
-                      boxSize={{ base: "80px", md: "70px", lg: "190px" }}
-                      src={elem.api_featured_image
-                      }
-                    />
-                    <br />
-                    <Stack
-                      spacing={4}
-                      direction="row"
-                      align="center"
-                      marginLeft="10%"
-                    >
-                      {isDesktop ? <Button>Edit</Button> : <></>}
-                      {isDesktop ? (
-                        <Button onClick={()=>{handleDelete(elem._id,elem.cost)}}>Remove Item</Button>
-                      ) : (
-                        <Button>Remove</Button>
-                      )}
-                    </Stack>
-                    <br />
-                  </Box>
+          {data.length === 0 ? (
+            <div>
+              <h1>!! Your Cart is Empty</h1>
+              <br />
+              <Button mt="25px" colorScheme="pink" onClick={homepage}>
+                HomePage
+              </Button>{" "}
+            </div>
+          ) : (
+            <>
+              {" "}
+              {[data]?.map((elem) => {
+                return (
+                  <>
+                    <Flex mt="20px">
+                      <Box width="30%" justifyContent="center">
+                        <Image
+                          m="auto"
+                          boxSize={{ base: "80px", md: "70px", lg: "190px" }}
+                          src={elem.api_featured_image}
+                        />
+                        <br />
+                        <Stack
+                          spacing={4}
+                          direction="row"
+                          align="center"
+                          marginLeft="10%"
+                        >
+                          {isDesktop ? <Button>Edit</Button> : <></>}
+                          {isDesktop ? (
+                            <Button
+                              onClick={() => {
+                                handleDelete(elem._id, elem.cost);
+                              }}
+                            >
+                              Remove Item
+                            </Button>
+                          ) : (
+                            <Button>Remove</Button>
+                          )}
+                        </Stack>
+                        <br />
+                      </Box>
 
-                  <Box width="50%" fontSize={{ base: "12px", md: "12px" }}>
-                    {isDesktop ? (
-                      <Heading as="h5" size="sm" fontWeight="550">
-                        {elem.description
-}
-                      </Heading>
-                    ) : (
-                      <Text>{elem.description
-                      }</Text>
-                    )}
-                    {/* <Text>Brand : {elem.condition}</Text> */}
-                  </Box>
+                      <Box width="50%" fontSize={{ base: "12px", md: "12px" }}>
+                        {isDesktop ? (
+                          <Heading as="h5" size="sm" fontWeight="550">
+                            {elem.description}
+                          </Heading>
+                        ) : (
+                          <Text>{elem.description}</Text>
+                        )}
+                        {/* <Text>Brand : {elem.condition}</Text> */}
+                      </Box>
 
-                  {/* <Box width="20%" fontSize="14px">
+                      {/* <Box width="20%" fontSize="14px">
                     <Text>
                       {Number(elem.price.raw) + Number(elem.price.extracted)}
                     </Text>
                   </Box> */}
 
-                  {/* {isDesktop ? (
+                      {/* {isDesktop ? (
                     <Box width="20%" fontSize="14px">
                       <Text border="1px solid pink">
                         {Number(elem.price.raw) + Number(elem.price.extracted)}
@@ -160,7 +166,7 @@ setPrice(0);
                     <></>
                   )} */}
 
-                  {/* {isDesktop ? (
+                      {/* {isDesktop ? (
                     <Box width="20%" fontSize="14px">
                       <Text>
                         {Number(elem.price.raw) + Number(elem.price.extracted)}
@@ -169,12 +175,13 @@ setPrice(0);
                   ) : (
                     <></>
                   )} */}
-                </Flex>
-                <Divider borderWidth="2px" />
-              </>
-            );
-          })}</>
-         }
+                    </Flex>
+                    <Divider borderWidth="2px" />
+                  </>
+                );
+              })}
+            </>
+          )}
         </Box>
 
         <Box
@@ -189,7 +196,7 @@ setPrice(0);
           <Flex mt="20px">
             <Text>Subtotal</Text>
             <Spacer />
-            <Text>{price*75}</Text>
+            <Text>{price * 75}</Text>
           </Flex>
           <Divider borderWidth="2px" />
           <Flex mt="20px">
@@ -238,17 +245,6 @@ setPrice(0);
 
 export default Cart;
 
-
-
-
-
-
-
-
-
-
-
-
 //   const [qty,setQty]=useState(1);
 //   const [totalPrice,setTotalPrice] = useState(0);
 //   const getTotal=  ()=>{
@@ -256,14 +252,14 @@ export default Cart;
 //       console.log(el.data.price.extracted)
 //       return setTotalPrice((prev)=>{
 //         prev= prev+ (+el.data.price.extracted);
-      
+
 //         return prev;
 //          })
 //     })
 //    }
-  
+
 //   useEffect(()=>{getTotal()},
-    
+
 //   [data]);
 //   const getdata =async()=>{
 //     const res = await fetch("/cart");
@@ -273,10 +269,10 @@ export default Cart;
 
 //   }
 //  useEffect(()=>{
-  
+
 //   getdata();
 //  },[])
- 
+
 //  const handleDelete =async(id)=>{
 //   const res =await fetch("/cart/"+id,{
 //     method: "DELETE",
@@ -284,11 +280,11 @@ export default Cart;
 //   })
 //   let newdata= await res.json();
 //   // setData(newdata);
- 
+
 //   console.log(newdata,id);
 //   setTotalPrice(0)
 //   getdata();
 //   // getTotal();
 //   console.log("check",totalPrice)
- 
+
 //  }

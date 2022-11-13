@@ -184,13 +184,13 @@ const Paymentpage = () => {
                         <Flex>
                           <Text fontSize="lg">Name on Card</Text>
                         </Flex>
-                        <Input variant="outline" placeholder="Card Name" />
+                        <Input type="text" variant="outline" placeholder="Card Name" />
                         <br></br>
                         <br></br>
                         <Flex>
                           <Text fontSize="lg">Card Number</Text>
                         </Flex>
-                        <Input variant="outline" placeholder="Card Number" />
+                        <Input variant="outline" placeholder="Card Number" type="number" />
                         <br></br>
                         <br></br>
                         <Flex>
@@ -221,8 +221,8 @@ const Paymentpage = () => {
                         </Flex>
                         <br></br>
                         <Box>
-                          <Text fontSize="lg">Security Code</Text>
-                          <Input variant="outline" placeholder="CVV" />
+                          <Text fontSize="lg" >Security Code</Text>
+                          <Input variant="outline" type="password" placeholder="CVV" />
                         </Box>
                       </Box>
                     }

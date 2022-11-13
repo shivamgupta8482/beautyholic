@@ -34,7 +34,11 @@ const Mainroutes = () => {
           path="/PaymentPage"
           element={<Paymentpage></Paymentpage>}
         ></Route>
-        <Route path="/Cart" element={<Cart />}></Route>
+        <Route path="/Cart" element={
+        <Privateroute>
+        <Cart />
+        </Privateroute>
+        }></Route>
         <Route
           path="/CheckoutPage"
           element={<Checkoutpage></Checkoutpage>}

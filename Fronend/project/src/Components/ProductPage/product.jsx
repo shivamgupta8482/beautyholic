@@ -41,10 +41,8 @@ const ProductsPage = () => {
 
   //----------------------------------------------getting data and logics-----------------------------------------------
 
-  const pData = useSelector(
-    (state) => state.productPageReducer.audioProjects
-  );
-    let productData=Array.from(pData)
+  const pData = useSelector((state) => state.productPageReducer.audioProjects);
+  let productData = Array.from(pData);
   const dispatch = useDispatch();
 
   // filter function
@@ -248,18 +246,41 @@ const ProductsPage = () => {
 
                                 <br />
                                 <Flex gap="15px">
-                                  <Link to="/cart/create">
+                                  {/* <Link to="/cart">
                                     <Button colorScheme="pink">
                                       Add To Cart
                                     </Button>
-                                  </Link>
-                                  <Button>
+                                  </Link> */}
+                                  {/* <Flex gap="15px">
+                                    <Button
+                                      colorScheme="pink"
+                                      onClick={() => handleAddToCart(elem.id)}
+                                    >
+                                      Add To Cart
+                                    </Button>
+                                    <Button>
+                                      <AiOutlineHeart />{" "}
+                                    </Button>
+                                  </Flex> */}
+
+                                  {/* <Button>
                                     <AiOutlineHeart />{" "}
-                                  </Button>
+                                  </Button> */}
                                 </Flex>
                               </Box>
                             </Box>
                           </Link>
+                          <Flex gap="15px">
+                                    <Button
+                                      colorScheme="pink"
+                                      onClick={() => handleAddToCart(elem.id)}
+                                    >
+                                      Add To Cart
+                                    </Button>
+                                    <Button>
+                                      <AiOutlineHeart />{" "}
+                                    </Button>
+                                  </Flex>
                         </Box>
                       </WrapItem>
                     </Wrap>
