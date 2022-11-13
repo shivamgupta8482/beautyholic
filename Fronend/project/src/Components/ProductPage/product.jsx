@@ -41,10 +41,10 @@ const ProductsPage = () => {
 
   //----------------------------------------------getting data and logics-----------------------------------------------
 
-  const productData = useSelector(
+  const pData = useSelector(
     (state) => state.productPageReducer.audioProjects
   );
-
+    let productData=Array.from(pData)
   const dispatch = useDispatch();
 
   // filter function

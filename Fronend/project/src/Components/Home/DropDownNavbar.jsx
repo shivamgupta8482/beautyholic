@@ -1,22 +1,141 @@
-import React from "react";
+
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { getNavData, getProjectData } from "../../Redux/ProductPageRedux/action";
+
+// // import { getData } from '../../api/api';
+// import axios from "axios"
+//  const getData = function (category) {
+//   return axios(`https://backendcwnem.onrender.com/products/${category}`).then(r=> r.data).catch(err=> console.log(err))}
 
 function DropDownNavbar() {
   const [show, setShow] = React.useState(false);
+  // const [data,setData]=useState([]);
   // const { isOpen, onOpen, onClose } = useDisclosure()
+  const navData = useSelector((state) => state.productPageReducer.navData);
+  
+  let dataArr = Array.from(navData);
+  const dispatch = useDispatch();
+
+  // navbar elements dynamic coding***************************
+
+  // const [ndata,setNdata]=useState([]);
+
+  // useEffect(()=>{
+  // if(ndata===null){
+  //  return getData(category).then(r=>setNdata(r)).catch(err=>console.log(err))
+  // }
+  // },[])
+
+  const [category, setCategory] = useState("blush");
+  const navigate =useNavigate();
+  useEffect(() => {
+    if (navData.length === 0) {
+      dispatch(getNavData());
+    }
+  }, [dispatch]);
+
+  // useEffect(()=>{
+  //   setData(navData);
+  // },[])
+
+  const handleChange = (e) => {
+    setCategory(e.target.value);
+    dispatch(getNavData(category));
+  };
+  const handleClick = (e) => {
+    setCategory(e.target.value);
+    dispatch(getProjectData(category));
+    navigate("/ProductsPage")
+    
+  };
+  // console.log(navData);
+
+
+
+
 
   return (
     <div class="navbar">
       <div class="dropdown">
-        <button class="dropbtn">
+
+        <button
+          class="dropbtn onInside "
+          onPointerEnter={handleChange}
+          onClick={handleClick}
+          value="blush"
+        >
           BLUSH
-          <i class="fa fa-caret-down"></i>
+          <i class="fa fa-caret-down"> </i>
+
         </button>
         <div class="dropdown-content">
           <div class="row">
             <div class="column">
               <br />
-              <h5 className="dropdown-heading">BLUSH</h5>
+
+              <h5 className="dropdown-heading">GLUTEN FREE</h5>
               <br />
+
+              {dataArr.length > 0 &&
+                dataArr?.map((e, i) => {
+                  for (var v = i; v < 14; v++) {
+                    return (
+                      <Link to={`/SingleProductPage/${e.id}`}>{e.name}</Link>
+                    );
+                  }
+                })}
+            </div>
+            <div class="column">
+              <br />
+              <h5 className="dropdown-heading">NATURAL</h5>
+              <br />
+
+              {dataArr.length > 0 &&
+                dataArr?.map((e, i) => {
+                  var temp = i + 15;
+                  for (var v = temp; v < 30; v++) {
+                    return (
+                      <Link to={`/SingleProductPage/${e.id}`}>{e.brand}</Link>
+                    );
+                  }
+                })}
+            </div>
+            <div class="column">
+              <br />
+              <h5 className="dropdown-heading">ORGANIC</h5>
+              <br />
+
+              {dataArr.length > 0 &&
+                dataArr?.map((e, i) => {
+                  var temp = i + 31;
+                  for (var v = temp; v < 46; v++) {
+                    return (
+                      <Link to={`/SingleProductPage/${e.id}`}>{e.name}</Link>
+                    );
+                  }
+                })}
+            </div>
+            <div class="column">
+              <br />
+              <h5 className="dropdown-heading">VEGAN</h5>
+              <br />
+
+              {dataArr.length > 0 &&
+                dataArr?.map((e, i) => {
+                  for (var v = i + 47; v < 60; v++) {
+                    return (
+                      <Link to={`/SingleProductPage/${e.id}`}>{e.brand}</Link>
+                    );
+                  }
+                })}
+            </div>
+            {/* <div class="column"> 
+            <br/>
+              <h5 className='dropdown-heading'>FACE</h5>
+              <br/>
+
               <a href="#">BB CREAM </a>
               <a href="#">BLUSH</a>
               <a href="#">Bronzer </a>
@@ -31,10 +150,12 @@ function DropDownNavbar() {
               <a href="#">Makeup Kits </a>
               <a href="#">Makeup Remover </a>
               <a href="#">Setting Spray </a>
-            </div>
-            <div class="column">
+
+            </div> */}
+            {/* <div class="column">
               <br />
-              <h5 className="dropdown-heading">BRONZER</h5>
+              <h5 className="dropdown-heading">EYE</h5>
+
               <br />
               <a href="#"> Contact Lenses </a>
               <a href="#"> Eye Kit </a>
@@ -48,10 +169,13 @@ function DropDownNavbar() {
               <a href="#"> Kajal </a>
               <a href="#"> Mascara </a>
               <a href="#"> Under Eye Concealer </a>
-            </div>
-            <div class="column">
+
+            </div> */}
+            {/* <div class="column">
               <br />
-              <h5 className="dropdown-heading">EYEBROW</h5>
+              <h5 className="dropdown-heading">LIPS</h5>
+
+            
               <br />
               <a href="#">Lipstick</a>
               <a href="#">Liquid Lipstick</a>
@@ -61,11 +185,13 @@ function DropDownNavbar() {
               <a href="#">Lip Crayon</a>
               <a href="#">Lip Stain</a>
               <a href="#">Lip Stain</a>
-            </div>
+            </div> */}
 
-            <div class="column">
+
+            {/* <div class="column">
               <br />
-              <h5 className="dropdown-heading">NAIL POLISh</h5>
+              <h5 className="dropdown-heading">NAILS</h5>
+
               <br />
               <a href="#">Manicure & Pedicure Kits</a>
               <a href="#">Nail Polish</a>
@@ -73,8 +199,10 @@ function DropDownNavbar() {
               <a href="#">Nail Polish Sets</a>
               <a href="#">Nail Art Kits</a>
               <a href="#">Nail Polish Remover</a>
-            </div>
-            <div class="column">
+
+            </div> */}
+            {/* <div class="column">
+
               <br />
               <h5 className="dropdown-heading">TOOL BRUSHES</h5>
               <br />
@@ -88,19 +216,36 @@ function DropDownNavbar() {
               <a href="#">Sponges & Applicators</a>
               <a href="#">Sharpeners</a>
               <a href="#">Tweezers</a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
       <div class="dropdown">
-        <button class="dropbtn">
-          SKIN
+        <button class="dropbtn" onPointerEnter={handleChange} onClick={handleClick}
+        value="bronzer">
+          BRONZER
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
           <div class="row">
             <div class="column">
               <br />
+
+              <h5 className="dropdown-heading">GLUTEN FREE</h5>
+              <br />
+
+              {dataArr.length > 0 &&
+                dataArr?.map((e, i) => {
+                  for (var v = i; v < 14; v++) {
+                    return (
+                      <Link to={`/SingleProductPage/${e.id}`}>{e.name}</Link>
+                    );
+                  }
+                })}
+            </div>
+            {/* <div class="column">
+              <br />
+
               <h5 className="dropdown-heading">EYE CARE</h5>
               <br />
               <a href="skin1.html">Dark Circles </a>
@@ -111,8 +256,10 @@ function DropDownNavbar() {
               <a href="#">Puffiness </a>
               <a href="#">Under Eye Creams </a>
               <a href="#">Under Eye Wrinkles</a>
-            </div>
-            <div class="column">
+
+            </div> */}
+            {/* <div class="column">
+
               <br />
               <h5 className="dropdown-heading">FACE CARE</h5>
               <br />
@@ -129,7 +276,7 @@ function DropDownNavbar() {
               <a href="#"> Mask & Peels </a>
               <a href="#">Serum</a>
               <a href="#">Toner & Astringents</a>
-            </div>
+            </div> */}
             <div class="column">
               <br />
               <h5 className="dropdown-heading">BODY CARE</h5>
@@ -149,6 +296,20 @@ function DropDownNavbar() {
               <a href="#"> Night Cream</a>
               <a href="#"> Neck Creams</a>
             </div>
+            <div class="column">
+              <br />
+              <h5 className="dropdown-heading">GLUTEN FREE</h5>
+              <br />
+
+              {dataArr.length > 0 &&
+                dataArr?.map((e, i) => {
+                  for (var v = i; v < 14; v++) {
+                    return (
+                      <Link to={`/SingleProductPage/${e.id}`}>{e.name}</Link>
+                    );
+                  }
+                })}
+            </div>
 
             <div class="column">
               <h5>
@@ -164,8 +325,8 @@ function DropDownNavbar() {
       </div>
 
       <div class="dropdown">
-        <button class="dropbtn">
-          HAIR
+        <button class="dropbtn" onPointerEnter={handleChange} onClick={handleClick} value="eyebrow">
+          EYEBROW
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
@@ -209,8 +370,8 @@ function DropDownNavbar() {
       </div>
 
       <div class="dropdown">
-        <button class="dropbtn">
-          PERSONAL CARE
+        <button class="dropbtn" onPointerEnter={handleChange} onClick={handleClick} value="eyeliner">
+          EYELINER
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
@@ -258,8 +419,8 @@ function DropDownNavbar() {
         </div>
       </div>
       <div class="dropdown">
-        <button class="dropbtn">
-          MOMS &BABY CARE
+        <button class="dropbtn" onPointerEnter={handleChange} onClick={handleClick} value="eyeshadow">
+          EYESHADOW
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
@@ -300,8 +461,12 @@ function DropDownNavbar() {
         </div>
       </div>
       <div class="dropdown">
-        <button class="dropbtn">
-          FRAGRANCE
+        <button
+          class="dropbtn"
+          onPointerEnter={handleChange} onClick={handleClick}
+          value="foundation"
+        >
+          FOUNDATION
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
@@ -328,8 +493,8 @@ function DropDownNavbar() {
       </div>
 
       <div class="dropdown">
-        <button class="dropbtn">
-          AYURVEDA
+        <button class="dropbtn" onPointerEnter={handleChange} onClick={handleClick} value="lip_liner">
+          LIP LINER
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
@@ -370,14 +535,82 @@ function DropDownNavbar() {
                   alt=""
                 />
               </h5>
+
             </div>
           </div>
         </div>
       </div>
 
       <div class="dropdown">
-        <button class="dropbtn">
-          BRANDS
+        <button class="dropbtn" onPointerEnter={handleChange} onClick={handleClick} value="lipstick">
+          LIPSTICK
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <div class="brands">
+            <h3>Top Brands</h3>
+            <h3>View All</h3>
+          </div>
+          <div class="row brands">
+            <div class="column extra">
+              <div className="bransformation">
+                <div>LAKME</div>
+                <div>lOREAL-PARIS</div>
+                <div>JOY</div>
+                <div>AROMA MAGIC</div>
+                <div>LOTUS HERBALS</div>
+                <div>BIOTIQUE</div>
+                <div>VLCC</div>
+                <div>VEGA</div>
+                <div>MAYBELLINE</div>
+                <div>MAMAEARTH</div>
+                <div>CHICCO</div>
+                <div>NEUTROGENA</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn" onPointerEnter={handleChange} onClick={handleClick} value="mascara">
+          MASCARA
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <div class="brands">
+            <h3>Top Brands</h3>
+            <h3>View All</h3>
+          </div>
+          <div class="row brands">
+            <div class="column extra">
+              <div className="bransformation">
+                <div>LAKME</div>
+                <div>lOREAL-PARIS</div>
+                <div>JOY</div>
+                <div>AROMA MAGIC</div>
+                <div>LOTUS HERBALS</div>
+                <div>BIOTIQUE</div>
+                <div>VLCC</div>
+                <div>VEGA</div>
+                <div>MAYBELLINE</div>
+                <div>MAMAEARTH</div>
+                <div>CHICCO</div>
+                <div>NEUTROGENA</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button
+          class="dropbtn"
+          onPointerEnter={handleChange} onClick={handleClick}
+          value="nail_polish"
+        >
+          NAIL POLISH
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
