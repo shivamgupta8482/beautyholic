@@ -93,12 +93,14 @@ export default function Navbar() {
             bg="white"
           >
             <Box w={{ base: "20%", md: "20%", lg: "20%" }}>
+              <Link to="/">
               <Image
                 ml="20px"
                 w={{ base: "70px", md: "100px", lg: "120px" }}
                 h={{ base: "50px", md: "100px", lg: "80px" }}
                 src={BeautyHolic}
               />
+              </Link>
             </Box>
 
             <Flex w={{ base: "50%", md: "50%", lg: "55%" }}>
