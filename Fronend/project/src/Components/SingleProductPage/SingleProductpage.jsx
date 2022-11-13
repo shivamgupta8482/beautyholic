@@ -23,9 +23,11 @@ import { TiTick } from "react-icons/ti";
 export const SingleProductpage = () => {
   const { id } = useParams();
   const [singlProductData, setSingleProductData] = useState({});
-  const productData = useSelector(
+  const spData = useSelector(
     (state) => state.productPageReducer.audioProjects
   );
+
+  let productData=Array.from(spData)
   const dispatch = useDispatch();
 
   console.log(productData);
