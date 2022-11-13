@@ -7,7 +7,9 @@ import {
   Image,
   Text,
   Select,
-  WrapItem,Center, useToast
+  WrapItem,
+  Center,
+  useToast,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
@@ -45,7 +47,7 @@ const ProductsPage = () => {
 
   const dispatch = useDispatch();
 
-  // filter function 
+  // filter function
 
   const handleFilterAudio = (e) => {
     let value = e.target.value;
@@ -58,7 +60,7 @@ const ProductsPage = () => {
     }
   };
 
-  // sorting function 
+  // sorting function
 
   const handleSort = (e) => {
     let value = e.target.value;
@@ -72,33 +74,26 @@ const ProductsPage = () => {
     }
   }, [dispatch, productData.length]);
 
+  //-------------------------handleaddtocart---------------------------------------------------------------------
 
-//-------------------------handleaddtocart---------------------------------------------------------------------
-
-const toast = useToast();
-const handleAddToCart=(id)=>{
-const targetproduct =  productData.filter(e=>{
-  return e.id==id;
-})
-  dispatch(addtocart(targetproduct))
-  .then(r=>{
-    console.log(r);
-    if(r.payload=="note created"){
-      toast({
-              title: `Product added to cart successfully`,
-              status: "success",
-              duration: 900,
-              position: "top",
-              isClosable: true,
-            });
-           
-    }
-  })
-}
-
-
-
-
+  const toast = useToast();
+  const handleAddToCart = (id) => {
+    const targetproduct = productData.filter((e) => {
+      return e.id == id;
+    });
+    dispatch(addtocart(targetproduct)).then((r) => {
+      console.log(r);
+      if (r.payload == "note created") {
+        toast({
+          title: `Product added to cart successfully`,
+          status: "success",
+          duration: 900,
+          position: "top",
+          isClosable: true,
+        });
+      }
+    });
+  };
 
   //-------------------------------------------------------------------------------------------------------
   return (
@@ -172,9 +167,14 @@ const targetproduct =  productData.filter(e=>{
                           class="Productbox"
                         >
                           <Link to={`/SingleProductPage/${elem.id}`}>
-                            <Image className="ProductImage" src={elem.api_featured_image} w="100%" h="200px" />
-                            <Box padding={"20px"} >
-                              <Box mb={"10px"}  >
+                            <Image
+                              className="ProductImage"
+                              src={elem.api_featured_image}
+                              w="100%"
+                              h="200px"
+                            />
+                            <Box padding={"20px"}>
+                              <Box mb={"10px"}>
                                 <Flex
                                   justifyContent="space-between"
                                   gap="10px"
@@ -186,11 +186,16 @@ const targetproduct =  productData.filter(e=>{
                                 </Flex>
                               </Box>
                               <hr />
-                             <Box height="50px">
-                             <Text fontSize="lg" fontWeight="550" className="ProductText" mt="5px">
-                                {elem.name}
-                              </Text>
-                             </Box>
+                              <Box height="50px">
+                                <Text
+                                  fontSize="lg"
+                                  fontWeight="550"
+                                  className="ProductText"
+                                  mt="5px"
+                                >
+                                  {elem.name}
+                                </Text>
+                              </Box>
                               {/* <Text fontSize="lg" fontWeight="550">
                                 {elem.description}
                               </Text> */}
@@ -222,39 +227,39 @@ const targetproduct =  productData.filter(e=>{
                                     <h2
                                       style={{ textDecoration: "line-through" }}
                                     >
-                                      ₹{(elem.price)*75==0?356:(elem.price)*75}
+                                      ₹
+                                      {elem.price * 75 == 0
+                                        ? 356
+                                        : elem.price * 75}
                                     </h2>
                                   </Box>
                                   <Box>
-                                    <h2>₹{((elem.price)*75)*0.88==0?236:((elem.price)*75)*0.88}</h2>
+                                    <h2>
+                                      ₹
+                                      {elem.price * 75 * 0.88 == 0
+                                        ? 236
+                                        : elem.price * 75 * 0.88}
+                                    </h2>
                                   </Box>
                                   <Box>
                                     <p>12%off</p>
                                   </Box>
                                 </Flex>
-                                
+
                                 <br />
-<<<<<<< HEAD
                                 <Flex gap="15px">
                                   <Link to="/cart/create">
-                                  <Button colorScheme="pink">
-=======
-                               
-                              </Box>
-                            </Box>
-                            </Link>
-                            
-                            <Flex gap="15px">
-                                  <Button colorScheme="pink" onClick={()=>handleAddToCart(elem.id)}>
->>>>>>> 0991551b9dcd5db6041326c207525dacf9717144
-                                    Add To Cart
-                                  </Button>
+                                    <Button colorScheme="pink">
+                                      Add To Cart
+                                    </Button>
                                   </Link>
                                   <Button>
                                     <AiOutlineHeart />{" "}
                                   </Button>
                                 </Flex>
-                            
+                              </Box>
+                            </Box>
+                          </Link>
                         </Box>
                       </WrapItem>
                     </Wrap>
@@ -321,28 +326,30 @@ const targetproduct =  productData.filter(e=>{
                                     <h2
                                       style={{ textDecoration: "line-through" }}
                                     >
-                                     ₹{(elem.price)*75}
+                                      ₹{elem.price * 75}
                                     </h2>
                                   </Box>
                                   <Box>
-                                    <h2>₹{((elem.price)*75)*0.88}</h2>
+                                    <h2>₹{elem.price * 75 * 0.88}</h2>
                                   </Box>
                                   <Box>
                                     <p>12%off</p>
                                   </Box>
                                 </Flex>
-                               
                               </Box>
                             </Box>
                           </Link>
                           <Flex gap="15px">
-                                  <Button colorScheme="pink" onClick={()=>handleAddToCart(elem.id)}>
-                                    Add To Cart
-                                  </Button>
-                                  <Button>
-                                    <AiOutlineHeart />{" "}
-                                  </Button>
-                                </Flex>
+                            <Button
+                              colorScheme="pink"
+                              onClick={() => handleAddToCart(elem.id)}
+                            >
+                              Add To Cart
+                            </Button>
+                            <Button>
+                              <AiOutlineHeart />{" "}
+                            </Button>
+                          </Flex>
                         </Box>
                       </WrapItem>
                     </Wrap>
