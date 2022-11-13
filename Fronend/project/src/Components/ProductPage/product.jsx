@@ -7,7 +7,7 @@ import {
   Image,
   Text,
   Select,
-  WrapItem,
+  WrapItem,Center, useToast
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
 
 import { Link } from "react-router-dom";
+import { addtocart } from "../../Redux/AuthReducer/action";
 
 const ProductsPage = () => {
   //----------------------------------------------------------responsive sizes--------------------------------
@@ -70,6 +71,34 @@ const ProductsPage = () => {
       dispatch(getProjectData());
     }
   }, [dispatch, productData.length]);
+
+
+//-------------------------handleaddtocart---------------------------------------------------------------------
+
+const toast = useToast();
+const handleAddToCart=(id)=>{
+const targetproduct =  productData.filter(e=>{
+  return e.id==id;
+})
+  dispatch(addtocart(targetproduct))
+  .then(r=>{
+    console.log(r);
+    if(r.payload=="note created"){
+      toast({
+              title: `Product added to cart successfully`,
+              status: "success",
+              duration: 900,
+              position: "top",
+              isClosable: true,
+            });
+           
+    }
+  })
+}
+
+
+
+
 
   //-------------------------------------------------------------------------------------------------------
   return (
@@ -203,10 +232,21 @@ const ProductsPage = () => {
                                     <p>12%off</p>
                                   </Box>
                                 </Flex>
+                                
                                 <br />
+<<<<<<< HEAD
                                 <Flex gap="15px">
                                   <Link to="/cart/create">
                                   <Button colorScheme="pink">
+=======
+                               
+                              </Box>
+                            </Box>
+                            </Link>
+                            
+                            <Flex gap="15px">
+                                  <Button colorScheme="pink" onClick={()=>handleAddToCart(elem.id)}>
+>>>>>>> 0991551b9dcd5db6041326c207525dacf9717144
                                     Add To Cart
                                   </Button>
                                   </Link>
@@ -214,9 +254,7 @@ const ProductsPage = () => {
                                     <AiOutlineHeart />{" "}
                                   </Button>
                                 </Flex>
-                              </Box>
-                            </Box>
-                          </Link>
+                            
                         </Box>
                       </WrapItem>
                     </Wrap>
@@ -293,17 +331,18 @@ const ProductsPage = () => {
                                     <p>12%off</p>
                                   </Box>
                                 </Flex>
-                                <Flex gap="10px">
-                                  <Button colorScheme="pink">
+                               
+                              </Box>
+                            </Box>
+                          </Link>
+                          <Flex gap="15px">
+                                  <Button colorScheme="pink" onClick={()=>handleAddToCart(elem.id)}>
                                     Add To Cart
                                   </Button>
                                   <Button>
                                     <AiOutlineHeart />{" "}
                                   </Button>
                                 </Flex>
-                              </Box>
-                            </Box>
-                          </Link>
                         </Box>
                       </WrapItem>
                     </Wrap>

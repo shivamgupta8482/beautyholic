@@ -1,7 +1,33 @@
-import React from 'react'
-import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text } from "@chakra-ui/react";
+import React, { useState } from 'react'
+import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text,Button } from "@chakra-ui/react";
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+  } from '@chakra-ui/react'
+
 
 const Checkoutpage = () => {
+const [cartdata,setCartData] = useState([]);
+const navigate = useNavigate()
+
+
+
+    const handleRoute=()=>{
+        navigate("/PaymentPage");
+      }
+      const CartData = useSelector(data=>data);
+     useEffect(()=>{
+       
+        setCartData(CartData.AuthReducer.cartdata)
+        console.log(CartData.AuthReducer.cartdata);
+     },[])
+      
   return (
     <>
     <Box h={{base : '110px', md : '155px', lg : '220px'}}></Box>
@@ -22,7 +48,7 @@ const Checkoutpage = () => {
           </FormControl>
 
           <FormControl isRequired mt='20px'>
-              <FormLabel>Lasat Name</FormLabel>
+              <FormLabel>Last Name</FormLabel>
               <Input size='sm' mt='10px' focusBorderColor='#dd2985' type='text' name="Lname"  value={FormData.Lname} />
           </FormControl>
 
@@ -92,28 +118,67 @@ const Checkoutpage = () => {
               <FormLabel>Phone Number</FormLabel>
               <Input size='sm' mt='10px' focusBorderColor='#dd2985' type='number' name="phone" value={FormData.phone} />
           </FormControl>
+
+          <Button mt="25px" colorScheme="pink" onClick={handleRoute}>
+              PROCEED TO CHECKOUT
+            </Button>
       </Box>
 
       <Box w={{base : '100%', md :'40%', lg : '30%'}}>
-          <Text textAlign='center'>Order Summmary</Text>
-          {/* {CartData.map((elem)=>{
+      <Accordion defaultIndex={[0]} allowMultiple>
+  <AccordionItem>
+    <h2>
+      <AccordionButton>
+        <Box flex='1' textAlign='left'>
+          ORDER SUMMARY
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+    {cartdata.map((elem)=>{
               return (
                   <Flex  mt='20px'>
                       <Box  width='30%' display='flex' justifyContent='center'>
-                          <Image m='auto' boxSize={{base : '80px', md :'60px', lg :'100px'}} src={elem.image}/>
+                          <Image m='auto' boxSize={{base : '80px', md :'60px', lg :'100px'}} src={elem.api_featured_image
+}/>
                       </Box>
 
                       <Box width='50%' fontSize={{base : '12px', md : '12px'}}>
-                      <Text fontWeight='550'>{elem.title}</Text>
+                      <Text fontWeight='550'>{elem.brand}</Text>
                       <Text>Brand : {elem.brand}</Text>
                       </Box>
 
                       <Box  width='20%' fontSize='14px'>
-                          <Text>{elem.rupee+elem.price}</Text>
+                          <Text>{elem.price*70}</Text>
                       </Box>
                   </Flex>
               )
-          })} */}
+          })}
+    </AccordionPanel>
+  </AccordionItem>
+
+  
+</Accordion>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+        
       </Box>
     </Flex>
       {/* <PaymentPage data={FormData}/> */}

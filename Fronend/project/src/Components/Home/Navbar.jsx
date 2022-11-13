@@ -8,6 +8,7 @@ import {FaUserAlt} from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux'
 import { getProjectData } from '../../Redux/ProductPageRedux/action'
 import { useState } from 'react'
+
 // import { CartContext } from '../Context/CartContext'
 export default function Navbar ( ){
     // const {TotalCartPrice,SetTotalCartPrice,CartData} = useContext();
@@ -279,7 +280,7 @@ console.log(filter)
           
 
                 <Flex  gap={{base : '15px', md : '15px' , lg : '20px'}} alignItems={'center'} justifyContent='center'  w={{base : '18%', md : '20%' , lg : '15%'}}>
-                   <Tooltip ><Button variant='unstyled' size='xsm' fontSize={{base : '14px', md : '16px', lg : '25px'}} _hover={{color : '#dd2985'}}><BsCartCheck/></Button></Tooltip>
+                   <Tooltip ><Button variant='unstyled' size='xsm' fontSize={{base : '14px', md : '16px', lg : '25px'}} _hover={{color : '#dd2985'}}><Link to="/cart"><BsCartCheck/></Link></Button></Tooltip>
                     <Tooltip >
                     <Text  fontSize={{base :'12px', md : '14px' }} fontWeight='550'>0</Text>
                      </Tooltip>  
@@ -327,3 +328,12 @@ console.log(filter)
         </>
     );
 };
+
+
+
+
+
+
+
+
+
