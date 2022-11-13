@@ -28,7 +28,7 @@ export const filterData = (value) =>(dispatch)=>{
 
    dispatch({type : FILTER_PROJECT_DATA_REQUEST}) 
 
-   return axios.get(`https://beautybebodbjson.onrender.com/Hair?status=${value}`)
+   return axios.get(`https://makeup-api.herokuapp.com/api/v1/products.json?status=${value}`)
    .then((res)=>{
       //console.log(res.data)
       return dispatch({ type : FILTER_PROJECT_DATA_SUCCESS, payload : res.data})
