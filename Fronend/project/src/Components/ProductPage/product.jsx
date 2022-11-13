@@ -22,7 +22,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
 
 import { Link } from "react-router-dom";
-import { addtocart } from "../../Redux/AuthReducer/action";
+import { addtocart, getcartdata } from "../../Redux/AuthReducer/action";
 
 const ProductsPage = () => {
   //----------------------------------------------------------responsive sizes--------------------------------
@@ -41,10 +41,9 @@ const ProductsPage = () => {
 
   //----------------------------------------------getting data and logics-----------------------------------------------
 
-  const pData = useSelector(
-    (state) => state.productPageReducer.audioProjects
-  );
-    let productData=Array.from(pData)
+  const pData = useSelector((state) => state.productPageReducer.audioProjects);
+  const cData = useSelector((state) => state.AuthReducer.cartdata);
+  let productData = Array.from(pData);
   const dispatch = useDispatch();
 
   // filter function
@@ -74,6 +73,7 @@ const ProductsPage = () => {
     }
   }, [dispatch, productData.length]);
 
+ 
   //-------------------------handleaddtocart---------------------------------------------------------------------
 
   const toast = useToast();
@@ -93,7 +93,10 @@ const ProductsPage = () => {
         });
       }
     });
+    localStorage.setItem("cartcount",cData.length)
   };
+
+
 
   //-------------------------------------------------------------------------------------------------------
   return (
@@ -247,18 +250,41 @@ const ProductsPage = () => {
 
                                 <br />
                                 <Flex gap="15px">
-                                  <Link to="/cart/create">
+                                  {/* <Link to="/cart">
                                     <Button colorScheme="pink">
                                       Add To Cart
                                     </Button>
-                                  </Link>
-                                  <Button>
+                                  </Link> */}
+                                  {/* <Flex gap="15px">
+                                    <Button
+                                      colorScheme="pink"
+                                      onClick={() => handleAddToCart(elem.id)}
+                                    >
+                                      Add To Cart
+                                    </Button>
+                                    <Button>
+                                      <AiOutlineHeart />{" "}
+                                    </Button>
+                                  </Flex> */}
+
+                                  {/* <Button>
                                     <AiOutlineHeart />{" "}
-                                  </Button>
+                                  </Button> */}
                                 </Flex>
                               </Box>
                             </Box>
                           </Link>
+                          <Flex gap="15px">
+                                    <Button
+                                      colorScheme="pink"
+                                      onClick={() => handleAddToCart(elem.id)}
+                                    >
+                                      Add To Cart
+                                    </Button>
+                                    <Button>
+                                      <AiOutlineHeart />{" "}
+                                    </Button>
+                                  </Flex>
                         </Box>
                       </WrapItem>
                     </Wrap>

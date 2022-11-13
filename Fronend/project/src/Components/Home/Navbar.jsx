@@ -15,13 +15,14 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 import { FaSearch } from "react-icons/fa";
 import { BsCartCheck } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import BeautyHolic from "../../Assets/BeautyHolic.png";
 import { FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { getProjectData } from "../../Redux/ProductPageRedux/action";
 import { useState } from "react";
+import Cart from "../../Routes/Cart";
 
 // import { CartContext } from '../Context/CartContext'
 export default function Navbar() {
@@ -32,6 +33,7 @@ export default function Navbar() {
   const [filter, setFilter] = useState([]);
   const dispatch = useDispatch();
   const data = useSelector((data) => data.productPageReducer.audioProjects);
+  const Cart = useSelector((data) => data.AuthReducer.cartdata);
   const handleClick = () => {
     // setSearch(e.target.value);
     //console.log("1");
@@ -41,6 +43,13 @@ export default function Navbar() {
     });
     datafilter();
   };
+  const navigate=useNavigate();
+  // logout function 
+  const handleLogout=()=>{
+    localStorage.setItem("token2","")
+    navigate("/")
+  }
+
 
   const datafilter = () => {
     const data = products.filter((elem) => {
@@ -77,7 +86,7 @@ export default function Navbar() {
   return (
     <>
       <div className="NavMainDiv">
-        <Box maxW="100%" className="TopNav">
+        <Box maxW="100%" className="TopNav" >
           <Image
             boxSize="100%"
             m="auto"
@@ -93,12 +102,14 @@ export default function Navbar() {
             bg="white"
           >
             <Box w={{ base: "20%", md: "20%", lg: "20%" }}>
+              <Link to="/" >
               <Image
                 ml="20px"
                 w={{ base: "70px", md: "100px", lg: "120px" }}
                 h={{ base: "50px", md: "100px", lg: "80px" }}
                 src={BeautyHolic}
               />
+              </Link>
             </Box>
 
             <Flex w={{ base: "50%", md: "50%", lg: "55%" }}>
@@ -355,7 +366,7 @@ export default function Navbar() {
               </Tooltip>
               <Tooltip>
                 <Text fontSize={{ base: "12px", md: "14px" }} fontWeight="550">
-                  0
+                  Cart
                 </Text>
               </Tooltip>
             </Flex>
@@ -378,18 +389,20 @@ export default function Navbar() {
                           zIndex={"100"}
                           marginLeft={"-1rem"}
                           width="-9rem"
-                        >
-                          <MenuItem>
+                        >{
+                          localStorage.getItem("token2")?<MenuItem>
+                          <Button onClick={handleLogout} >Log Out </Button>
+                        </MenuItem>: <> <MenuItem>
                             <Link to="/login">Log in</Link>{" "}
                           </MenuItem>
                           <MenuItem>
                             <Link to="/signup">Sign up</Link>
-                          </MenuItem>
+                          </MenuItem></>}
                         </MenuList>
                       </>
                     )}
                   </Menu>
-                  <Text paddingTop="0.4rem">My Account</Text>
+                  <Text pl="8px" paddingTop="0.4rem">{localStorage.getItem("token2")?localStorage.getItem("userName"):"Create Account"}</Text>
                 </Flex>
               </div>
             </Box>
