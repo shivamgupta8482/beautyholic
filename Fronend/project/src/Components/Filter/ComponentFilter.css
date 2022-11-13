@@ -1,0 +1,24 @@
+.dropDownContainer {
+    margin-bottom: 5px;
+    width: 260px;
+    background-color: #f5f5f5;
+    color: #6c6c6c;
+  }
+  
+  .filterName {
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  
+  .filterName:hover {
+    text-decoration: underline;
+  }
+  
+  .checkBox {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .checkBox > input{
+      margin-right: 5px;
+  }

@@ -17,9 +17,15 @@ import WelcomeToBeautyProducts from '../Components/Home/WelcomeToBeautyProducts'
 function Home() {
 
   return (
+<<<<<<< HEAD
     <div name="home" w="100%">
         <Navbar/>
         <DropDownNavbar/>
+=======
+    <div name="home">
+        {/* <Navbar/>
+        <DropDownNavbar/> */}
+>>>>>>> main
         <Sidebar/>
         <Banner1/>
         <HotDeal/>

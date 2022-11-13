@@ -1,3 +1,6 @@
+
+
+
 import React from 'react'
 import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text,Button,Center,Heading, AlertDialogCloseButton } from "@chakra-ui/react";
 import GoogleSign from '../Components/SignUp/GoogleSign';
@@ -8,6 +11,7 @@ import { login } from '../Redux/AuthReducer/action';
 import { useToast } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { Signigfun } from "../Redux/AuthReducer/action";
+
 const Loginpage = () => {
 
 //local states--------------------------------------------------------------------------------------------------
@@ -184,6 +188,7 @@ setPassword("");
 
   return (
     <>
+
     
     <Box h={{base : '110px', md : '155px', lg : '220px'}}></Box>
    {
@@ -275,4 +280,5 @@ setPassword("");
   )
 }
 
-export default Loginpage
+
+export default Loginpage;

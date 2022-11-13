@@ -1,5 +1,5 @@
 .App {
-    text-align: center;
+    /* text-align: center; */
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   }
   
@@ -7,9 +7,9 @@
     font-weight: bold;
     text-align: start;
   }
-  a{
+  /* a{
     font-size: 20px;
-  }
+  } */
   
         /* navbar css start */
   

@@ -15,7 +15,8 @@ export const getProjectData = () => (dispatch) =>{
      
      dispatch({type : GET_PROJECT_DATA_REQUEST}) 
 
-     return axios.get("https://backendcwnem.onrender.com/products/eyebrow")
+   //   return axios.get(`https://backendcwnem.onrender.com/products/eyebrow?_limit=4`)
+   return axios.get(`https://prem-23.herokuapp.com/products?_limit=4`)
      .then((res)=>{
         return dispatch({ type : GET_PROJECT_DATA_SUCCESS, payload : res.data })
      })
