@@ -22,51 +22,59 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
+
+import { cartproductdelete, getcartdata } from "../Redux/AuthReducer/action";
+import { useDispatch } from "react-redux";
+ import { Link } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const [data,setData] = useState([]);
-  const [qty,setQty]=useState(1);
-  const [totalPrice,setTotalPrice] = useState(0);
-  const getTotal=  ()=>{
-    data.map((el)=>{
-      console.log(el.data.price.extracted)
-      return setTotalPrice((prev)=>{
-        prev= prev+ (+el.data.price.extracted);
-      
-        return prev;
-         })
-    })
-   }
-  
-  useEffect(()=>{getTotal()},
-    
-  [data]);
-  const getdata =async()=>{
-    const res = await fetch("/cart");
-    let data = await res.json();
-    setData(data)
-    console.log("c",data);
+  const [loading,setLoading] = useState(false);
+  const [price,setPrice]=useState(0);
 
-  }
- useEffect(()=>{
+
+
+
+const navigate = useNavigate();
+// const navigate = useNavigate();
+const dispatch = useDispatch();
+
+const handleDelete=(id,cost)=>{
+  //setPrice(price-cost)
   
-  getdata();
- },[])
- 
- const handleDelete =async(id)=>{
-  const res =await fetch("/cart/"+id,{
-    method: "DELETE",
-   headers: {'Content-Type': 'application/json'}
+  //  setPrice(prev => prev-cost)
+   
+  dispatch(cartproductdelete(id))
+  .then(r=>{
+    console.log(r.payload);
+   // setData(r.payload)
   })
-  let newdata= await res.json();
-  // setData(newdata);
+  
+ setLoading(true);
+}
+
+
+
+const handleRoute=()=>{
+  navigate("/CheckoutPage");
+}
+
+
+useEffect(()=>{
+setPrice(0);
+  dispatch(getcartdata())
+  .then(r=>{
+    console.log(r.payload);
+    setData(r.payload)
+    // shippingprice();
+  })
+
+  const wholeprice=data.map((e)=>(
+      setPrice(prev => prev+e.price)
+     ))
+  setLoading(false);
  
-  console.log(newdata,id);
-  setTotalPrice(0)
-  getdata();
-  // getTotal();
-  console.log("check",totalPrice)
- 
- }
+},[data && loading])
 
   const [isDesktop, setDesktop] = useState(window.innerWidth > 1050);
 
@@ -101,7 +109,8 @@ const Cart = () => {
                     <Image
                       m="auto"
                       boxSize={{ base: "80px", md: "70px", lg: "190px" }}
-                      src={elem.thumbnail}
+                      src={elem.api_featured_image
+                      }
                     />
                     <br />
                     <Stack
@@ -112,7 +121,7 @@ const Cart = () => {
                     >
                       {isDesktop ? <Button>Edit</Button> : <></>}
                       {isDesktop ? (
-                        <Button>Remove Item</Button>
+                        <Button onClick={()=>{handleDelete(elem._id,elem.cost)}}>Remove Item</Button>
                       ) : (
                         <Button>Remove</Button>
                       )}
@@ -123,21 +132,23 @@ const Cart = () => {
                   <Box width="50%" fontSize={{ base: "12px", md: "12px" }}>
                     {isDesktop ? (
                       <Heading as="h5" size="sm" fontWeight="550">
-                        {elem.title}
+                        {elem.description
+}
                       </Heading>
                     ) : (
-                      <Text>{elem.title}</Text>
+                      <Text>{elem.description
+                      }</Text>
                     )}
                     {/* <Text>Brand : {elem.condition}</Text> */}
                   </Box>
 
-                  <Box width="20%" fontSize="14px">
+                  {/* <Box width="20%" fontSize="14px">
                     <Text>
                       {Number(elem.price.raw) + Number(elem.price.extracted)}
                     </Text>
-                  </Box>
+                  </Box> */}
 
-                  {isDesktop ? (
+                  {/* {isDesktop ? (
                     <Box width="20%" fontSize="14px">
                       <Text border="1px solid pink">
                         {Number(elem.price.raw) + Number(elem.price.extracted)}
@@ -145,9 +156,9 @@ const Cart = () => {
                     </Box>
                   ) : (
                     <></>
-                  )}
+                  )} */}
 
-                  {isDesktop ? (
+                  {/* {isDesktop ? (
                     <Box width="20%" fontSize="14px">
                       <Text>
                         {Number(elem.price.raw) + Number(elem.price.extracted)}
@@ -155,7 +166,7 @@ const Cart = () => {
                     </Box>
                   ) : (
                     <></>
-                  )}
+                  )} */}
                 </Flex>
                 <Divider borderWidth="2px" />
               </>
@@ -175,7 +186,7 @@ const Cart = () => {
           <Flex mt="20px">
             <Text>Subtotal</Text>
             <Spacer />
-            <Text>458</Text>
+            <Text>{price*75}</Text>
           </Flex>
           <Divider borderWidth="2px" />
           <Flex mt="20px">
@@ -210,9 +221,11 @@ const Cart = () => {
             </AccordionItem>
           </Accordion>
           <Center>
-            <Button mt="25px" colorScheme="pink">
+            {/* <Link to="/PaymentPage"> */}
+            <Button mt="25px" colorScheme="pink" onClick={handleRoute}>
               PROCEED TO CHECKOUT
             </Button>
+            {/* </Link> */}
           </Center>
         </Box>
       </Flex>
@@ -221,3 +234,58 @@ const Cart = () => {
 };
 
 export default Cart;
+
+
+
+
+
+
+
+
+
+
+
+
+//   const [qty,setQty]=useState(1);
+//   const [totalPrice,setTotalPrice] = useState(0);
+//   const getTotal=  ()=>{
+//     data.map((el)=>{
+//       console.log(el.data.price.extracted)
+//       return setTotalPrice((prev)=>{
+//         prev= prev+ (+el.data.price.extracted);
+      
+//         return prev;
+//          })
+//     })
+//    }
+  
+//   useEffect(()=>{getTotal()},
+    
+//   [data]);
+//   const getdata =async()=>{
+//     const res = await fetch("/cart");
+//     let data = await res.json();
+//     setData(data)
+//     console.log("c",data);
+
+//   }
+//  useEffect(()=>{
+  
+//   getdata();
+//  },[])
+ 
+//  const handleDelete =async(id)=>{
+//   const res =await fetch("/cart/"+id,{
+//     method: "DELETE",
+//    headers: {'Content-Type': 'application/json'}
+//   })
+//   let newdata= await res.json();
+//   // setData(newdata);
+ 
+//   console.log(newdata,id);
+//   setTotalPrice(0)
+//   getdata();
+//   // getTotal();
+//   console.log("check",totalPrice)
+ 
+//  }

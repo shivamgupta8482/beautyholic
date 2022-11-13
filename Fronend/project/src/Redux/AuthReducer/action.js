@@ -7,7 +7,7 @@ const login = (payload)=> dispatch=>{
 // const navigate = useNavigate()
 
     dispatch({type:types.USER_LOGIN_REQUEST})
-    return axios.post("http://localhost:5000/customer/login", payload)
+    return axios.post("https://backendcwnem.onrender.com/customer/login", payload)
     .then((r)=>{
       //let data = JSON.parse(r.config.data)
       console.log(r.data)
@@ -19,6 +19,111 @@ const login = (payload)=> dispatch=>{
     })
   }
   export {login}
+
+
+
+
+
+//addtocart----------------------------------------------------------------------------------------------------------
+const token =localStorage.getItem("token");
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  }
+
+const addtocart = (payload)=> dispatch=>{
+  // let username = payload.username  
+  // const navigate = useNavigate()
+  console.log(payload[0]);
+  console.log(token);
+      dispatch({type:types.ADD_TO_CART_REQUEST})
+      return axios.post("https://backendcwnem.onrender.com/addcart/create", payload[0],{headers:headers})
+      .then((r)=>{
+        //let data = JSON.parse(r.config.data)
+        console.log(r)
+     return dispatch({type:types.ADD_TO_CART_SUCCESS, payload:r.data})
+      
+      })
+      .catch((err)=>{
+        dispatch({type:types.ADD_TO_CART_FAILURE,payload:err})
+      })
+    }
+
+export {addtocart}
+
+
+
+
+
+  
+export const getcartdata = () => (dispatch) =>{
+
+  
+     
+  dispatch({type : types.GET_CART_DATA_REQUEST}) 
+
+  return axios.get("https://backendcwnem.onrender.com/addcart",{headers:headers})
+  .then((res)=>{
+
+     return dispatch({ type : types.GET_CART_DATA_SUCCESS, payload : res.data })
+  })
+  .catch((error)=>{
+     dispatch({ type : types.GET_CART_DATA_FAILURE })
+  })
+} 
+
+
+
+const cartproductdelete = (payload)=> dispatch=>{
+  // let username = payload.username  
+  // const navigate = useNavigate()
+  //console.log(payload[0]);
+  //console.log(token);
+      dispatch({type:types.CART_PRODUCT_DELETE_REQUEST})
+      return axios.delete(`https://backendcwnem.onrender.com/addcart/${payload}`,{headers:headers})
+      .then((r)=>{
+        //let data = JSON.parse(r.config.data)
+        console.log(r.data)
+        
+     return dispatch({type:types.CART_PRODUCT_DELETE_SUCCESS, payload:r.data})
+      
+      })
+      .catch((err)=>{
+        dispatch({type:types.CART_PRODUCT_DELETE_FAILURE,payload:err})
+      })
+    }
+
+export {cartproductdelete}
+
+
+// const checkoutdata = (payload)=> dispatch=>{
+  
+//       dispatch({type:types.CHECK_OUT_PAGE_REQUEST})
+//       return ( payload)
+//       .then((r)=>{
+//         //let data = JSON.parse(r.config.data)
+//         console.log(r)
+//      return dispatch({type:types.CHECK_OUT_PAGE_SUCCESS, payload:r})
+      
+//       })
+//       .catch((err)=>{
+//         dispatch({type:types.CHECK_OUT_PAGE_FAILURE,payload:err})
+//       })
+//     }
+
+// export {checkoutdata}
+
+
+
+
+
+
+
+
+
+
+
 
 //   const register = (payload)=> dispatch=>{
 //     console.log(payload)

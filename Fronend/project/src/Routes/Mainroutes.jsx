@@ -25,9 +25,9 @@ const Mainroutes = () => {
         <Route path='/SingleProductPage/:id' element={<Singleproductpage></Singleproductpage>}></Route>
         <Route path='/Login' element={<Loginpage></Loginpage>}></Route>
         <Route path='/Signup' element={<Signup></Signup>}></Route>
-        <Route path='/PaymentPage' element={<Paymentpage></Paymentpage>}></Route>
-        <Route path='/Cart' element={<Cart />}></Route>
-        <Route path='/CheckoutPage' element={<Checkoutpage></Checkoutpage>}></Route>
+        <Route path='/PaymentPage' element={<Privateroute><Paymentpage></Paymentpage></Privateroute>}></Route>
+        <Route path='/Cart' element={<Privateroute><Cart /></Privateroute>}></Route>
+        <Route path='/CheckoutPage' element={<Privateroute><Checkoutpage></Checkoutpage></Privateroute>}></Route>
         <Route path='/admin' element={<Admin />}></Route>
         <Route path='/ThankYou' element={<Thankyou />}></Route>
 
