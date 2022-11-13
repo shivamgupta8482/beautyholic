@@ -45,84 +45,12 @@ const handleCreate=()=>{
   navigate("/signup");
 }
 //---------------------------------------------------------------------------------------------------------------
-// const handleClick=()=>{
-  
-//   let loginData = {
-//     email: email,
-//     password: password,
-//   };
-//   let loggeduser = loginData.email;
-//   if (email && password) {
-//     dispatch(login(loginData))
-//     .then(r =>
-//       console.log(r),
-//        navigate('/', { state: loggeduser })  
-//     )
-// //     if(message.message=="Login Successful"){
-// //       setEmail("")
-// //       setPassword("")
-// //       alert("login successful");
-   
-// //     }else if(message.message=="User not exists"){
-// //       setEmail("")
-// //       setPassword("")
-// //       alert("inalid credentials");
-// //     //  setEmail(""),
-// // //setPassword("")
-// //     }
-// //    setMessage([]);
-//   }else{
-//     alert("fill all fields");
-//   }
- 
-  
-// }
 
-
-// let isAuth = useSelector((data) => data.AuthReducer.isAuth);
-
-
-// let isError = useSelector((data) => data.AuthReducer.isError);
-
-// let errorData = useSelector((data) => data.AuthReducer.errorData);
-
-
-
-// const toast = useToast();
-// function SendSignInRequest() {
-  
-  
-//   if(email && password){
-//     dispatch(Signigfun({ email: email, password: password }));
-//     setEmail("");
-//     setPassword("");
-//   }else{
-//     alert("fill all details");
-//   }
-//  console.log(isAuth);
-// }
-
-// useEffect(() => {
-//   if (isAuth === true) {
-//     toast({
-//       title: `Login Successfull`,
-//       status: "success",
-//       duration: 900,
-//       position: "top",
-//       isClosable: true,
-//     });
-//      alert("Sign in succesful");
-//     setTimeout(() => {
-//       navigate("/");
-//     }, 2000);
-
-//   }
-// }, [isAuth]);
 
 const isauth =useSelector(data=>(data.AuthReducer.payload)); 
 
 const SendSignInRequest = e => {
-  e.preventDefault();
+ // e.preventDefault();
   let loginData = {
     email: email,
     password: password,
@@ -132,7 +60,11 @@ const SendSignInRequest = e => {
     setMsg("");
      dispatch(login(loginData))
    .then( r=>{
-    console.log(r.payload)
+    //console.log(r.payload.token)
+    if(!r.payload.token){
+    }else{
+      localStorage.setItem("token",r.payload.token)
+    }
     if(r.payload.message=="Login Successful"){
       toast({
               title: `Login Successfull`,
@@ -167,8 +99,6 @@ const SendSignInRequest = e => {
     handlesetData();
    })
    
-  }else{
-    return false
   }
   
   
@@ -176,14 +106,6 @@ const SendSignInRequest = e => {
 const handlesetData=async()=>{
 setEmail("");
 setPassword("");
-// if(isauth.message=="Login Successful"){
-// alert("Login n successful");
-// console.log(isauth.message);
-// }
-// else if(isauth.message=="User not exists"){
-//   alert("user not found");
-// }
-//console.log(isauth);
 }
 
   return (
@@ -282,3 +204,6 @@ setPassword("");
 
 
 export default Loginpage;
+
+
+

@@ -28,7 +28,7 @@ export const SingleProductpage = () => {
   );
   const dispatch = useDispatch();
 
-  console.log(productData);
+  //console.log(productData);
   useEffect(() => {
     if (productData.length === 0) {
       dispatch(getProjectData());

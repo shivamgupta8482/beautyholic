@@ -5,6 +5,10 @@ const iniState = {
   isLoading: false,
   isError: false,
   data: "",
+  addtocarddata:[],
+  cartdata:[],
+  checkoutdata:[]
+
 };
 export const reducer = (state = iniState, action) => {
   const { type, payload } = action;
@@ -35,26 +39,55 @@ export const reducer = (state = iniState, action) => {
         isError:true,
         data: "",
       };
-    //   case types.USER_SIGNUP_REQUEST:
-    //   return {
-    //       ...iniState,
-    //       isLoading:false,
-    //       isAuth:false,
-    //   }
-    //   case types.USER_SIGNUP_SUCCESS:
-    //   return {
-    //       ...iniState,
-    //       isLoading:false,
-    //       isAuth:true,
-    //   }
-    //   case types.USER_SIGNUP_FAILURE:
-    //   return {
-    //       ...iniState,
-    //       isLoading:false,
-    //       isError:true,
-    //       isAuth:false,
-    //       data:{}
-    //   }
+      case types.ADD_TO_CART_REQUEST:
+      return {
+          ...iniState,
+
+        
+      }
+      case types.ADD_TO_CART_SUCCESS:
+      return {
+          ...iniState,
+         audioProjects : payload
+      }
+      case types.ADD_TO_CART_FAILURE:
+      return {
+          ...iniState,
+         
+      }
+
+      case types.GET_CART_DATA_REQUEST:
+        return {
+            ...iniState,
+  
+          
+        }
+        case types.GET_CART_DATA_SUCCESS:
+        return {
+            ...iniState,
+           cartdata : payload
+        }
+        case types.GET_CART_DATA_FAILURE:
+        return {
+            ...iniState,
+           
+        }
+        case types.CHECK_OUT_PAGE_REQUEST:
+          return {
+              ...iniState,
+    
+            
+          }
+          case types.CHECK_OUT_PAGE_SUCCESS:
+          return {
+              ...iniState,
+             checkoutdata:payload
+          }
+          case types.CHECK_OUT_PAGE_FAILURE:
+          return {
+              ...iniState,
+             
+          }
 
     default:
       return state;

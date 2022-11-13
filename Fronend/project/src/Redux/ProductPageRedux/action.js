@@ -8,7 +8,8 @@ import {
     FILTER_PROJECT_DATA_SUCCESS, 
     SORT_DATA_FAILURE,
     SORT_DATA_REQUEST, 
-    SORT_DATA_SUCCESS    
+    SORT_DATA_SUCCESS,
+    
     } from "./actionTypes"; 
 
 export const getProjectData = () => (dispatch) =>{
@@ -51,3 +52,6 @@ export const sortData = (value)=>(dispatch) =>{
       dispatch({type : SORT_DATA_FAILURE})
    })
 }
+
+
+

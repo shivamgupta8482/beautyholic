@@ -25,7 +25,7 @@ const data = {
 
 
   const postdata = (data) => {
-    fetch('http://localhost:5000/customer/register', {
+    fetch('https://backendcwnem.onrender.com/customer/register', {
   method: 'POST', // or 'PUT'
   headers: {
     'Content-Type': 'application/json',

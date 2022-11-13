@@ -1,9 +1,18 @@
-import React from 'react'
+import {Navigate, useLocation} from "react-router-dom"
+import {useSelector} from "react-redux"
+//Create the HOC for protected Routes
+const PrivateRoute = ({children}) => {
+    const location = useLocation();
 
-const Privateroute = () => {
-  return (
-    <div>Privateroute</div>
-  )
-}
+   // const isAuth = useSelector((state) => state.AuthReducer.isAuth);
+   const isAuth = localStorage.getItem("token")
+  console.log(isAuth)
 
-export default Privateroute
+    if (!isAuth) {
+      return <Navigate to="/Login" ></Navigate>;
+    }
+    
+    return children;
+};
+
+export default PrivateRoute;
