@@ -114,6 +114,12 @@ export const SingleProductpage = () => {
           >
             Brand : {singlProductData.brand}
           </Text>
+          <Text></Text>
+          <Text  fontSize={{ base: "11px", md: "15px" }}
+            mt={{ base: "10px", md: "15px" }}
+            color="Black"
+            textAlign='justify'
+            fontWeight="550">Description:-<br/>{singlProductData.description}</Text>
           <br />
           <Flex gap="15px">
             <Text>Qty</Text>

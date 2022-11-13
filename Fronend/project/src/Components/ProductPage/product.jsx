@@ -50,7 +50,7 @@ const ProductsPage = () => {
   const handleFilterAudio = (e) => {
     let value = e.target.value;
 
-    if (value === "All") {
+    if (value === "nyx") {
       dispatch(getProjectData());
     } else {
       console.log("from filter", value);
@@ -60,11 +60,11 @@ const ProductsPage = () => {
 
   // sorting function
 
-  const handleSort = (e) => {
-    let value = e.target.value;
-    console.log(value);
-    dispatch(sortData(value));
-  };
+  // const handleSort = (e) => {
+  //   let value = e.target.value;
+  //   console.log(value);
+  //   dispatch(sortData(value));
+  // };
 
   useEffect(() => {
     if (productData.length === 0) {
@@ -109,7 +109,7 @@ const ProductsPage = () => {
                   fontWeight: "550",
                 }}
               >
-                Filter Results
+                Brands
               </h2>
               <h1
                 style={{
@@ -119,35 +119,34 @@ const ProductsPage = () => {
                   color: "gray",
                 }}
               >
-                Price
               </h1>
               <hr />
-              <div style={{ marginTop: "20px" }} onChange={handleFilterAudio}>
+              <div style={{ marginTop: "20px" }}>
                 <div style={{ padding: "10px" }}>
-                  <input type={"radio"} value="All" name="a" />
-                  <label style={{ paddingLeft: "8px" }}>Below 1,000</label>
+                  <input type={"checkbox"} value="nyx" onChange={handleFilterAudio}/>
+                  <label style={{ paddingLeft: "8px" }}>Nyx</label>
                 </div>
                 <div style={{ padding: "10px" }}>
-                  <input type={"radio"} value="Launching soon" name="a" />
-                  <label style={{ paddingLeft: "8px" }}>1,000 - 2,000</label>
+                  <input type={"checkbox"} value="clinique" onChange={handleFilterAudio}/>
+                  <label style={{ paddingLeft: "8px" }}>Clinique</label>
                 </div>
-                <div style={{ padding: "10px" }}>
-                  <input type={"radio"} value="Just Launched" name="a" />
-                  <label style={{ paddingLeft: "8px" }}>2,000 and above</label>
-                </div>
+                {/* <div style={{ padding: "10px" }}>
+                  <input type={"checkbox"} value="dior" onChange={handleFilterAudio}/>
+                  <label style={{ paddingLeft: "8px" }}>Dior</label>
+                </div> */}
               </div>
             </div>
             <div style={{ width: "100%" }}>
               <Box mt={"40px"} mb="20px">
-                <Flex justifyContent={"start"} gap="10px" alignItems={"center"}>
+                {/* <Flex justifyContent={"start"} gap="10px" alignItems={"center"}>
                   <Box>
-                    <Select w={"120px"} borderRadius="0" onChange={handleSort}>
+                    <Select w={"120px"} borderRadius="0" >
                       <option value="">Sort by</option>
                       <option value="asc">Trending</option>
                       <option value="desc">Price</option>
                     </Select>
                   </Box>
-                </Flex>
+                </Flex> */}
               </Box>
               <SimpleGrid minChildWidth="230px" spacing="20px">
                 {productData.length > 0 &&
