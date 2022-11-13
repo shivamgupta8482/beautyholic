@@ -30,7 +30,7 @@ export const SingleProductpage = () => {
   let productData=Array.from(spData)
   const dispatch = useDispatch();
 
-  console.log(productData);
+  //console.log(productData);
   useEffect(() => {
     if (productData.length === 0) {
       dispatch(getProjectData());

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -51,9 +52,14 @@ function DropDownNavbar() {
   };
   // console.log(navData);
 
+
+
+
+
   return (
     <div class="navbar">
       <div class="dropdown">
+
         <button
           class="dropbtn onInside "
           onPointerEnter={handleChange}
@@ -62,11 +68,13 @@ function DropDownNavbar() {
         >
           BLUSH
           <i class="fa fa-caret-down"> </i>
+
         </button>
         <div class="dropdown-content">
           <div class="row">
             <div class="column">
               <br />
+
               <h5 className="dropdown-heading">GLUTEN FREE</h5>
               <br />
 
@@ -127,6 +135,7 @@ function DropDownNavbar() {
             <br/>
               <h5 className='dropdown-heading'>FACE</h5>
               <br/>
+
               <a href="#">BB CREAM </a>
               <a href="#">BLUSH</a>
               <a href="#">Bronzer </a>
@@ -141,10 +150,12 @@ function DropDownNavbar() {
               <a href="#">Makeup Kits </a>
               <a href="#">Makeup Remover </a>
               <a href="#">Setting Spray </a>
+
             </div> */}
             {/* <div class="column">
               <br />
               <h5 className="dropdown-heading">EYE</h5>
+
               <br />
               <a href="#"> Contact Lenses </a>
               <a href="#"> Eye Kit </a>
@@ -158,10 +169,13 @@ function DropDownNavbar() {
               <a href="#"> Kajal </a>
               <a href="#"> Mascara </a>
               <a href="#"> Under Eye Concealer </a>
+
             </div> */}
             {/* <div class="column">
               <br />
               <h5 className="dropdown-heading">LIPS</h5>
+
+            
               <br />
               <a href="#">Lipstick</a>
               <a href="#">Liquid Lipstick</a>
@@ -173,9 +187,11 @@ function DropDownNavbar() {
               <a href="#">Lip Stain</a>
             </div> */}
 
+
             {/* <div class="column">
               <br />
               <h5 className="dropdown-heading">NAILS</h5>
+
               <br />
               <a href="#">Manicure & Pedicure Kits</a>
               <a href="#">Nail Polish</a>
@@ -183,8 +199,10 @@ function DropDownNavbar() {
               <a href="#">Nail Polish Sets</a>
               <a href="#">Nail Art Kits</a>
               <a href="#">Nail Polish Remover</a>
+
             </div> */}
             {/* <div class="column">
+
               <br />
               <h5 className="dropdown-heading">TOOL BRUSHES</h5>
               <br />
@@ -212,6 +230,7 @@ function DropDownNavbar() {
           <div class="row">
             <div class="column">
               <br />
+
               <h5 className="dropdown-heading">GLUTEN FREE</h5>
               <br />
 
@@ -226,6 +245,7 @@ function DropDownNavbar() {
             </div>
             {/* <div class="column">
               <br />
+
               <h5 className="dropdown-heading">EYE CARE</h5>
               <br />
               <a href="skin1.html">Dark Circles </a>
@@ -236,8 +256,10 @@ function DropDownNavbar() {
               <a href="#">Puffiness </a>
               <a href="#">Under Eye Creams </a>
               <a href="#">Under Eye Wrinkles</a>
+
             </div> */}
             {/* <div class="column">
+
               <br />
               <h5 className="dropdown-heading">FACE CARE</h5>
               <br />
@@ -513,6 +535,7 @@ function DropDownNavbar() {
                   alt=""
                 />
               </h5>
+
             </div>
           </div>
         </div>
@@ -575,6 +598,7 @@ function DropDownNavbar() {
                 <div>CHICCO</div>
                 <div>NEUTROGENA</div>
               </div>
+
             </div>
           </div>
         </div>

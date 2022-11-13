@@ -8,6 +8,7 @@ const addcartController = Router();
 
 addcartController.get("/", async (req, res) => {
   const products = await addCartModel.find({userId:req.body.userId});
+  console.log(products);
   res.send(products);
 });
 

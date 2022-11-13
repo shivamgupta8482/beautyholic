@@ -8,10 +8,12 @@ import {
     FILTER_PROJECT_DATA_SUCCESS, 
     SORT_DATA_FAILURE,
     SORT_DATA_REQUEST, 
+
     SORT_DATA_SUCCESS,    
     GET_NAVBAR_DATA_REQUEST,
     GET_NAVBAR_DATA_SUCCESS,
     GET_NAVBAR_DATA_FAILURE
+
     } from "./actionTypes"; 
 
 // nav bar data start ***********************************
@@ -40,7 +42,9 @@ export const getProjectData = (category) => (dispatch) =>{
      
      dispatch({type : GET_PROJECT_DATA_REQUEST}) 
 
+
      return axios.get(`https://backendcwnem.onrender.com/products/${category}`)
+
      .then((res)=>{
         return dispatch({ type : GET_PROJECT_DATA_SUCCESS, payload : res.data })
      })
@@ -76,3 +80,6 @@ export const sortData = (value)=>(dispatch) =>{
       dispatch({type : SORT_DATA_FAILURE})
    })
 }
+
+
+
