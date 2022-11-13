@@ -234,6 +234,11 @@ const targetproduct =  productData.filter(e=>{
                                 </Flex>
                                 
                                 <br />
+<<<<<<< HEAD
+                                <Flex gap="15px">
+                                  <Link to="/cart/create">
+                                  <Button colorScheme="pink">
+=======
                                
                               </Box>
                             </Box>
@@ -241,8 +246,10 @@ const targetproduct =  productData.filter(e=>{
                             
                             <Flex gap="15px">
                                   <Button colorScheme="pink" onClick={()=>handleAddToCart(elem.id)}>
+>>>>>>> 0991551b9dcd5db6041326c207525dacf9717144
                                     Add To Cart
                                   </Button>
+                                  </Link>
                                   <Button>
                                     <AiOutlineHeart />{" "}
                                   </Button>
