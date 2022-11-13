@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text,Button } from "@chakra-ui/react";
+import { Box, Divider, Flex,FormControl,FormLabel,Image,Input,Select,Text,Button, useToast } from "@chakra-ui/react";
 import { useNavigate } from 'react-router-dom';
 
 const SignUpform = () => {
@@ -59,11 +59,18 @@ alert("user is already present")
 
 
 
-
+const toast=useToast();
 
 const handleClick=()=>{
   if(email && password && name && userName && userName && phoneNo && confirmpassword && password!=confirmpassword){
-    alert("password and confirm password not matches");
+    
+    toast({
+      title: `password and confirm password not matches`,
+      status: "error",
+      duration: 900,
+      position: "top",
+      isClosable: true,
+    });
    
     setPassword("");
     setConfirmpassword("");
@@ -72,6 +79,7 @@ const handleClick=()=>{
  postdata(data)
  console.log(success);
  if(setSuccess){
+  localStorage.setItem("userName",name)
   navigate("/login");
  }
   setEmail("");
@@ -83,7 +91,14 @@ const handleClick=()=>{
 
  }
 else{
-  alert("fill all details");
+ 
+  toast({
+    title: `Fill all the details`,
+    status: "error",
+    duration: 900,
+    position: "top",
+    isClosable: true,
+  });
 }
 
  
@@ -115,12 +130,12 @@ else{
 
     <FormControl isRequired mt='20px' >
         <FormLabel >Full Name</FormLabel>
-        <Input value={name} size='md' onChange={(e)=>{setName(e.target.value)}} mt='1px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
+        <Input value={name} size='md'  onChange={(e)=>{setName(e.target.value)}} mt='1px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
     </FormControl>
 
     <FormControl isRequired mt='20px' >
         <FormLabel >Email</FormLabel>
-        <Input value={email} onChange={(e)=>{setEmail(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
+        <Input value={email} onChange={(e)=>{setEmail(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' type='email' _selected={{border : 'none'}} />
     </FormControl>
 
     <FormControl isRequired mt='20px' >
@@ -130,17 +145,17 @@ else{
 
     <FormControl isRequired mt='20px' >
         <FormLabel >Phone</FormLabel>
-        <Input value={phoneNo} onChange={(e)=>{setPhoneNo(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
+        <Input value={phoneNo} onChange={(e)=>{setPhoneNo(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' type='number' _selected={{border : 'none'}} />
     </FormControl>
 
     <FormControl isRequired mt='20px'>
         <FormLabel >Password</FormLabel>
-        <Input value={password} onChange={(e)=>{setPassword(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='text' name='Fname' />
+        <Input value={password} onChange={(e)=>{setPassword(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='password' name='Fname' />
     </FormControl>
 
     <FormControl isRequired mt='20px'>
         <FormLabel>Confirm Password</FormLabel>
-        <Input value={confirmpassword} onChange={(e)=>{setConfirmpassword(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='text' name='Fname'   />
+        <Input value={confirmpassword} onChange={(e)=>{setConfirmpassword(e.target.value)}} size='md' mt='1px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='password' name='Fname'   />
     </FormControl>
     <br />
 <Flex>

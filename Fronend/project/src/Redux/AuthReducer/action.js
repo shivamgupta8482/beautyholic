@@ -25,7 +25,7 @@ const login = (payload)=> dispatch=>{
 
 
 //addtocart----------------------------------------------------------------------------------------------------------
-const token =localStorage.getItem("token");
+const token =localStorage.getItem("token2");
   
   const headers = {
     'Content-Type': 'application/json',

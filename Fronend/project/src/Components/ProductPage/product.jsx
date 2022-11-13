@@ -22,7 +22,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineHeart, AiFillStar } from "react-icons/ai";
 
 import { Link } from "react-router-dom";
-import { addtocart } from "../../Redux/AuthReducer/action";
+import { addtocart, getcartdata } from "../../Redux/AuthReducer/action";
 
 const ProductsPage = () => {
   //----------------------------------------------------------responsive sizes--------------------------------
@@ -42,6 +42,7 @@ const ProductsPage = () => {
   //----------------------------------------------getting data and logics-----------------------------------------------
 
   const pData = useSelector((state) => state.productPageReducer.audioProjects);
+  const cData = useSelector((state) => state.AuthReducer.cartdata);
   let productData = Array.from(pData);
   const dispatch = useDispatch();
 
@@ -72,6 +73,7 @@ const ProductsPage = () => {
     }
   }, [dispatch, productData.length]);
 
+ 
   //-------------------------handleaddtocart---------------------------------------------------------------------
 
   const toast = useToast();
@@ -91,7 +93,10 @@ const ProductsPage = () => {
         });
       }
     });
+    localStorage.setItem("cartcount",cData.length)
   };
+
+
 
   //-------------------------------------------------------------------------------------------------------
   return (

@@ -63,7 +63,7 @@ const SendSignInRequest = e => {
     //console.log(r.payload.token)
     if(!r.payload.token){
     }else{
-      localStorage.setItem("token",r.payload.token)
+      localStorage.setItem("token2",r.payload.token)
     }
     if(r.payload.message=="Login Successful"){
       toast({
@@ -146,12 +146,12 @@ setPassword("");
 
          <FormControl isRequired mt='20px' >
              <FormLabel>Email</FormLabel>
-             <Input value={email} onChange={(e)=>{setEmail(e.target.value)}} size='lg' mt='10px' focusBorderColor='#dd2985' type='text' _selected={{border : 'none'}} />
+             <Input value={email} onChange={(e)=>{setEmail(e.target.value)}} size='lg' mt='10px' focusBorderColor='#dd2985' type='email' _selected={{border : 'none'}} />
          </FormControl>
 
          <FormControl isRequired mt='20px'>
              <FormLabel>Password</FormLabel>
-             <Input value={password} onChange={(e)=>{setPassword(e.target.value)}} size='lg' mt='10px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='text' name='Fname'  />
+             <Input value={password} onChange={(e)=>{setPassword(e.target.value)}} size='lg' mt='10px' focusBorderColor='#dd2985' border='1px solid #dd2985' type='password' name='Fname'  />
          </FormControl>
          <br />
 <Flex>

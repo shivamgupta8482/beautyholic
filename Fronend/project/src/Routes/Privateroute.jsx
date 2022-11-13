@@ -5,7 +5,7 @@ const PrivateRoute = ({children}) => {
     const location = useLocation();
 
    // const isAuth = useSelector((state) => state.AuthReducer.isAuth);
-   const isAuth = localStorage.getItem("token")
+   const isAuth = localStorage.getItem("token2")
   console.log(isAuth)
 
     if (!isAuth) {

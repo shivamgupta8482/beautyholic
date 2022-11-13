@@ -24,11 +24,13 @@ import {
 } from "@chakra-ui/react";
 
 import { cartproductdelete, getcartdata } from "../Redux/AuthReducer/action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //  import { Link } from "@chakra-ui/react";
 import { useNavigate, Link } from "react-router-dom";
 const Cart = () => {
-  const [data, setData] = useState([]);
+  const ctData = useSelector((state) => state.AuthReducer.cartdata);
+  let cartData = Array.from(ctData);
+  // const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [price, setPrice] = useState(0);
   //  let data=Array.from(datas);
@@ -46,9 +48,21 @@ const Cart = () => {
       console.log(r.payload);
       // setData(r.payload)
     });
-
+    // setTimeout(()=>{
+    //   <img src="https://i.pinimg.com/originals/97/e9/42/97e942ce7fc4e9d4ea6d844a382f251f.gif" alt="" />
+    //   },2000)
     setLoading(true);
   };
+  var sum=150;
+const handlesubtotal=()=>{
+  
+  var count=cartData.map((e)=>(e.price)+1)
+  for(var i=0;i<count.length;i++){
+    sum+=(count[i])*78
+  }
+  return console.log(count)
+}
+handlesubtotal()
 
   const homepage = () => {
     navigate("/");
@@ -66,9 +80,9 @@ const Cart = () => {
       // shippingprice();
     });
 
-    const wholeprice = data.map((e) => setPrice((prev) => prev + e.price));
+    const wholeprice = cartData.map((e) => setPrice((prev) => prev + e.price));
     setLoading(false);
-  }, [data && loading]);
+  }, [cartData && loading]);
 
   const [isDesktop, setDesktop] = useState(window.innerWidth > 1050);
 
@@ -95,7 +109,7 @@ const Cart = () => {
           <Text>ITEM</Text>
           <Divider borderWidth="2px" />
 
-          {data.length === 0 ? (
+          {cartData.length === 0 ? (
             <div>
               <h1>!! Your Cart is Empty</h1>
               <br />
@@ -106,24 +120,63 @@ const Cart = () => {
           ) : (
             <>
               {" "}
-              {[data]?.map((elem) => {
+              {cartData?.map((elem) => {
                 return (
                   <>
                     <Flex mt="20px">
-                      <Box width="30%" justifyContent="center">
+                      <Box width="30%" mr="100px" justifyContent="center">
                         <Image
                           m="auto"
                           boxSize={{ base: "80px", md: "70px", lg: "190px" }}
                           src={elem.api_featured_image}
                         />
                         <br />
-                        <Stack
+                        {/* <Stack
+                          spacing={4}
+                          direction="row"
+                          align="center"
+                          marginLeft="10%"
+                        > */}
+                          {/* {isDesktop ? <Button>Edit</Button> : <></>} */}
+                          {/* {isDesktop ? (
+                            <Button
+                              onClick={() => {
+                                handleDelete(elem._id, elem.cost);
+                              }}
+                            >
+                              Remove Item
+                            </Button>
+                          ) : (
+                            <Button>Remove</Button>
+                          )}
+                        </Stack> */}
+                        <br />
+                      </Box>
+
+                      <Box width="50%" fontSize={{ base: "12px", md: "12px" }}>
+                        {isDesktop ? (
+                          <><Heading as="h5" size="xl" fontWeight="550" >
+                            {elem.name}
+                          </Heading>
+                          <Text m="20px 0" fontSize="2xl" >{elem.brand}</Text>
+                          <Text fontSize="2xl">₹ {((elem.price)+1)*78}</Text>
+                          </>
+                        ) : (
+                          <Text>{elem.name}</Text>
+                        )}
+                        {/* <Text>Brand : {elem.condition}</Text> */}
+                      </Box>
+                          <Flex align="center" justify="center" >
+                            
+
+                            
+                          <Stack
                           spacing={4}
                           direction="row"
                           align="center"
                           marginLeft="10%"
                         >
-                          {isDesktop ? <Button>Edit</Button> : <></>}
+                          {/* {isDesktop ? <Button>Edit</Button> : <></>} */}
                           {isDesktop ? (
                             <Button
                               onClick={() => {
@@ -136,20 +189,8 @@ const Cart = () => {
                             <Button>Remove</Button>
                           )}
                         </Stack>
-                        <br />
-                      </Box>
-
-                      <Box width="50%" fontSize={{ base: "12px", md: "12px" }}>
-                        {isDesktop ? (
-                          <Heading as="h5" size="sm" fontWeight="550">
-                            {elem.description}
-                          </Heading>
-                        ) : (
-                          <Text>{elem.description}</Text>
-                        )}
-                        {/* <Text>Brand : {elem.condition}</Text> */}
-                      </Box>
-
+                       
+                          </Flex>
                       {/* <Box width="20%" fontSize="14px">
                     <Text>
                       {Number(elem.price.raw) + Number(elem.price.extracted)}
@@ -185,9 +226,10 @@ const Cart = () => {
         </Box>
 
         <Box
+        position="sticky" top="20vh"
           w={{ base: "100%", md: "40%", lg: "30%" }}
           h={{ base: "100%", md: "40%", lg: "100%" }}
-          border={"1px solid #dd2985"}
+          // border={"1px solid #dd2985"}
           padding="20px"
         >
           <Heading as="h4" size="md" textAlign="center">
@@ -196,19 +238,22 @@ const Cart = () => {
           <Flex mt="20px">
             <Text>Subtotal</Text>
             <Spacer />
-            <Text>{price * 75}</Text>
+            <Text>
+              {/* {price * 75} */}
+              ₹ {sum}
+              </Text>
           </Flex>
           <Divider borderWidth="2px" />
           <Flex mt="20px">
             <Text>Shipping</Text>
             <Spacer />
-            <Text>458</Text>
+            <Text>₹{150}</Text>
           </Flex>
           <Divider borderWidth="2px" />
           <Flex mt="20px">
-            <Text>Order</Text>
+            <Text>Orders</Text>
             <Spacer />
-            <Text>458</Text>
+            <Text>{cartData.length}</Text>
           </Flex>
           <Divider borderWidth="2px" />
           <Accordion allowToggle mt="20px">
