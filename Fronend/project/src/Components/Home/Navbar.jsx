@@ -2,11 +2,17 @@ import {
   Box,
   Button,
   Flex,
+  IconButton,
   Image,
   Input,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Text,
   Tooltip,
 } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
 import { FaSearch } from "react-icons/fa";
 import { BsCartCheck } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -318,7 +324,10 @@ export default function Navbar() {
                     _hover={{ color: "#dd2985", cursor: "pointer" }}
                     onClick={handleClick}
                   >
-                    <FaSearch />
+                    <IconButton
+                      aria-label="Search database"
+                      icon={<SearchIcon />}
+                    />
                   </Box>
                 </Box>
               ) : (
@@ -357,11 +366,30 @@ export default function Navbar() {
                     <i className="fa-solid fa-heart"></i>
                   </button>
                 </div>
-                <Flex className="signupbuttoncorner">
-                  <Box>
-                    <FaUserAlt />
-                  </Box>
-                  <Box className="text">My Account</Box>
+                <Flex>
+                  <Menu width={"10px"}>
+                    {({ isOpen }) => (
+                      <>
+                        <MenuButton isActive={isOpen} as={Button}>
+                          {/* {isOpen ? 'Close' : 'Open'} */}
+                          <FaUserAlt></FaUserAlt>
+                        </MenuButton>
+                        <MenuList
+                          zIndex={"100"}
+                          marginLeft={"-1rem"}
+                          width="-9rem"
+                        >
+                          <MenuItem>
+                            <Link to="/login">Log in</Link>{" "}
+                          </MenuItem>
+                          <MenuItem>
+                            <Link to="/signup">Sign up</Link>
+                          </MenuItem>
+                        </MenuList>
+                      </>
+                    )}
+                  </Menu>
+                  <Text paddingTop="0.4rem">My Account</Text>
                 </Flex>
               </div>
             </Box>
