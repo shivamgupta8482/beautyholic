@@ -101,7 +101,9 @@ setPrice(0);
           <Text>ITEM</Text>
           <Divider borderWidth="2px" />
 
-          {data.map((elem) => {
+         {
+          data.length==0?<></>
+          :<> { data?.map((elem) => {
             return (
               <>
                 <Flex mt="20px">
@@ -171,7 +173,8 @@ setPrice(0);
                 <Divider borderWidth="2px" />
               </>
             );
-          })}
+          })}</>
+         }
         </Box>
 
         <Box
