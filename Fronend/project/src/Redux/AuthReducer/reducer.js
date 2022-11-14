@@ -42,6 +42,7 @@ export const reducer = (state = iniState, action) => {
       case types.ADD_TO_CART_REQUEST:
       return {
           ...iniState,
+          isLoading: true,
 
         
       }
@@ -75,6 +76,7 @@ export const reducer = (state = iniState, action) => {
         case types.CHECK_OUT_PAGE_REQUEST:
           return {
               ...iniState,
+              isLoading: true,
     
             
           }

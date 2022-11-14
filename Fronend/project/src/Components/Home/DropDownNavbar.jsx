@@ -18,15 +18,7 @@ function DropDownNavbar() {
   let dataArr = Array.from(navData);
   const dispatch = useDispatch();
 
-  // navbar elements dynamic coding***************************
-
-  // const [ndata,setNdata]=useState([]);
-
-  // useEffect(()=>{
-  // if(ndata===null){
-  //  return getData(category).then(r=>setNdata(r)).catch(err=>console.log(err))
-  // }
-  // },[])
+ 
 
   const [category, setCategory] = useState("blush");
   const navigate =useNavigate();
@@ -36,9 +28,7 @@ function DropDownNavbar() {
     }
   }, [dispatch]);
 
-  // useEffect(()=>{
-  //   setData(navData);
-  // },[])
+ 
 
   const handleChange = (e) => {
     setCategory(e.target.value);
@@ -50,7 +40,7 @@ function DropDownNavbar() {
     navigate("/ProductsPage")
     
   };
-  // console.log(navData);
+ 
 
 
 

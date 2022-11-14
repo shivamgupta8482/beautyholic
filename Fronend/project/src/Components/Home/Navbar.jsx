@@ -24,27 +24,30 @@ import { getProjectData } from "../../Redux/ProductPageRedux/action";
 import { useState } from "react";
 import Cart from "../../Routes/Cart";
 
-// import { CartContext } from '../Context/CartContext'
+
 export default function Navbar() {
-  // const {TotalCartPrice,SetTotalCartPrice,CartData} = useContext();
+  
 
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState([]);
+  
   const dispatch = useDispatch();
   const data = useSelector((data) => data.productPageReducer.audioProjects);
   const Cart = useSelector((data) => data.AuthReducer.cartdata);
+
   const handleClick = () => {
-    // setSearch(e.target.value);
-    //console.log("1");
-    const y = dispatch(getProjectData());
+   
+    const y = dispatch(getProjectData(search));
     y.then((r) => {
+     // console.log(r);
       setProducts(r.payload);
     });
-    datafilter();
+    console.log(products);
+    // datafilter();
   };
   const navigate=useNavigate();
-  // logout function 
+ 
   const handleLogout=()=>{
     localStorage.setItem("token2","")
     navigate("/")
@@ -52,7 +55,7 @@ export default function Navbar() {
 
 
   const datafilter = () => {
-    const data = products.filter((elem) => {
+    const data = [products].filter((elem) => {
       return elem.name.toLowerCase().split(" ").join("").includes(search);
     });
     setFilter(data);
@@ -72,16 +75,18 @@ export default function Navbar() {
   //-----------------------------------------------------------------------------------------------
 
   useEffect(() => {
-    //console.log(products.name)
-    //console.log(search);
-
-    //setFilter(data);
-    //console.log(filter);
+  
 
     console.log(filter);
-    // console.log(search);
-    // console.log(products);
+
   }, [filter]);
+
+
+
+  const handleroute = (id)=>{
+    navigate(`/SingleProductPage/${id}`);
+    setProducts([]);
+  }
 
   return (
     <>
@@ -407,7 +412,7 @@ export default function Navbar() {
               </div>
             </Box>
           </Flex>
-          {search && filter.length != 0 && isDesktop ? (
+          {search && products.length!=0 && isDesktop ? (
             <Box
               w={{ base: "40%", md: "40%", lg: "30%" }}
               ml="35%"
@@ -418,9 +423,9 @@ export default function Navbar() {
               overflow="scroll"
               position="absolute"
             >
-              {filter.map((elem) => {
+              {products.map((elem) => {
                 return (
-                  <Box>
+                  <Box cursor={"pointer"} onClick={()=>handleroute(elem.id)}>
                     <Flex mt="20px">
                       <Box width="30%" display="flex" justifyContent="center">
                         <Image
@@ -430,7 +435,7 @@ export default function Navbar() {
                         />
                       </Box>
 
-                      <Box width="50%" fontSize={{ base: "12px", md: "12px" }}>
+                        <Box width="50%" fontSize={{ base: "12px", md: "12px" }}>
                         <Text>{elem.name}</Text>
                         {/* <Text>Brand : {elem.brand}</Text> */}
                       </Box>

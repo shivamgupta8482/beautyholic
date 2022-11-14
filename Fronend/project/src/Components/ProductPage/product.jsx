@@ -9,10 +9,20 @@ import {
   Select,
   WrapItem,
   Center,
-  useToast,
+  useToast,Stack
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { Radio, RadioGroup } from '@chakra-ui/react'
+
 import React from "react";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from "@chakra-ui/react";
 import {
   getProjectData,
   filterData,
@@ -27,7 +37,7 @@ import { addtocart, getcartdata } from "../../Redux/AuthReducer/action";
 const ProductsPage = () => {
   //----------------------------------------------------------responsive sizes--------------------------------
   const [isDesktop, setDesktop] = useState(window.innerWidth > 1050);
-
+  const [value, setValue] = React.useState('blush')
   const updateMedia = () => {
     setDesktop(window.innerWidth > 1050);
   };
@@ -47,25 +57,20 @@ const ProductsPage = () => {
   const dispatch = useDispatch();
 
   // filter function
-
+  const [category, setCategory] = useState("blush");
   const handleFilterAudio = (e) => {
-    let value = e.target.value;
+   // let value = e.target.value;
+   setCategory(e.target.value);
+   dispatch(getProjectData(category));
+   
 
-    if (value === "nyx") {
-      dispatch(getProjectData());
-    } else {
-      console.log("from filter", value);
-      dispatch(filterData(value));
-    }
+    // if (value === "nyx") {
+    //   dispatch(getProjectData());
+    // } else {
+    //   console.log("from filter", value);
+    //   dispatch(filterData(value));
+    // }
   };
-
-  // sorting function
-
-  // const handleSort = (e) => {
-  //   let value = e.target.value;
-  //   console.log(value);
-  //   dispatch(sortData(value));
-  // };
 
   useEffect(() => {
     if (productData.length === 0) {
@@ -73,7 +78,6 @@ const ProductsPage = () => {
     }
   }, [dispatch, productData.length]);
 
- 
   //-------------------------handleaddtocart---------------------------------------------------------------------
 
   const toast = useToast();
@@ -93,15 +97,38 @@ const ProductsPage = () => {
         });
       }
     });
-    localStorage.setItem("cartcount",cData.length)
+    localStorage.setItem("cartcount", cData.length);
   };
 
-
-
   //-------------------------------------------------------------------------------------------------------
+
+const isLoading = useSelector(data=>data.productPageReducer.isLoading)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //----------------------------------------------------------------------------------------------------------------
   return (
     <div>
-      {isDesktop ? (
+     {
+      isLoading?<><Box ><Center><img  src="https://i.gifer.com/7YUP.gif" alt="" /></Center></Box></>
+      :<> {isDesktop ? (
         <div>
           <Box style={{ width: "80%", margin: "auto", display: "flex" }}>
             <div
@@ -114,9 +141,96 @@ const ProductsPage = () => {
                   fontWeight: "550",
                 }}
               >
-                Brands
+                Filters
               </h2>
-              <h1
+              <Accordion defaultIndex={[0]} allowMultiple>
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box flex="1" textAlign="left">
+                        Sort By Categories
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+
+                  <RadioGroup onChange={setValue} value={value}>
+      <Stack>
+        <Radio  onChange={handleFilterAudio} value='blush'>All Products</Radio>
+        <Radio  onChange={handleFilterAudio} value='bronzer'>Blush</Radio>
+        <Radio  onChange={handleFilterAudio} value='eyebrow'>Bronzer</Radio>
+        <Radio  onChange={handleFilterAudio} value="eyeliner">EyeBrow</Radio>
+      </Stack>
+    </RadioGroup>
+
+
+
+
+
+
+
+                    {/* <input
+                      type={"checkbox"}
+                      value="blush"
+                      onChange={handleFilterAudio}
+                      checked="category"
+                    />
+                    <label style={{ paddingLeft: "8px" }}>Blush</label>
+                    <br />
+                    <input
+                      type={"checkbox"}
+                      value="bronzer"
+                      onChange={handleFilterAudio}
+                      checked="category"
+                    />
+                    <label style={{ paddingLeft: "8px" }}>Bronzer</label>
+                    <br />
+                    <input
+                      type={"checkbox"}
+                      value="eyebrow"
+                      onChange={handleFilterAudio}
+                      checked="category"
+                    />
+                    <label style={{ paddingLeft: "8px" }}>Eyebrow</label>
+                    <br />
+                    <input
+                      type={"checkbox"}
+                      value="eyeliner"
+                      onChange={handleFilterAudio}
+                      checked="category"
+                    />
+                    <label style={{ paddingLeft: "8px" }}>EyeLiner</label> */}
+                  </AccordionPanel>
+                </AccordionItem>
+
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box flex="1" textAlign="left">
+                        Sort By Price
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+
+
+                  <RadioGroup onChange={setValue} value={value}>
+      <Stack>
+        <Radio value='1'>Below 1000</Radio>
+        <Radio value='2'>Below 2000</Radio>
+        <Radio value='3'>Below 3000</Radio>
+      </Stack>
+    </RadioGroup>
+
+                   
+                 
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
+
+              {/* <h1
                 style={{
                   marginTop: "20px",
                   fontSize: "15px",
@@ -124,22 +238,22 @@ const ProductsPage = () => {
                   color: "gray",
                 }}
               >
-              </h1>
-              <hr />
-              <div style={{ marginTop: "20px" }}>
-                <div style={{ padding: "10px" }}>
+              </h1> */}
+              {/* <hr /> */}
+              {/* <div style={{ marginTop: "20px" }}> */}
+              {/* <div style={{ padding: "10px" }}>
                   <input type={"checkbox"} value="nyx" onChange={handleFilterAudio}/>
                   <label style={{ paddingLeft: "8px" }}>Nyx</label>
                 </div>
                 <div style={{ padding: "10px" }}>
                   <input type={"checkbox"} value="clinique" onChange={handleFilterAudio}/>
                   <label style={{ paddingLeft: "8px" }}>Clinique</label>
-                </div>
-                {/* <div style={{ padding: "10px" }}>
+                </div> */}
+              {/* <div style={{ padding: "10px" }}>
                   <input type={"checkbox"} value="dior" onChange={handleFilterAudio}/>
                   <label style={{ paddingLeft: "8px" }}>Dior</label>
                 </div> */}
-              </div>
+              {/* </div> */}
             </div>
             <div style={{ width: "100%" }}>
               <Box mt={"40px"} mb="20px">
@@ -275,16 +389,16 @@ const ProductsPage = () => {
                             </Box>
                           </Link>
                           <Flex gap="15px">
-                                    <Button
-                                      colorScheme="pink"
-                                      onClick={() => handleAddToCart(elem.id)}
-                                    >
-                                      Add To Cart
-                                    </Button>
-                                    <Button>
-                                      <AiOutlineHeart />{" "}
-                                    </Button>
-                                  </Flex>
+                            <Button
+                              colorScheme="pink"
+                              onClick={() => handleAddToCart(elem.id)}
+                            >
+                              Add To Cart
+                            </Button>
+                            <Button>
+                              <AiOutlineHeart />{" "}
+                            </Button>
+                          </Flex>
                         </Box>
                       </WrapItem>
                     </Wrap>
@@ -383,7 +497,8 @@ const ProductsPage = () => {
             </div>
           </Box>
         </div>
-      )}
+      )}</>
+     }
     </div>
   );
 };
