@@ -1,0 +1,171 @@
+{
+    "filterName": [
+      {
+        "id": 1,
+        "title": "SKIN TYPE ",
+        "category": [
+          {
+            "id": 11,
+            "tag": "Combination"
+          },
+          {
+            "id": 12,
+            "tag": "Dry"
+          },{
+            "id": 13,
+            "tag": "Normal"
+          },
+          {
+            "id": 14,
+            "tag": "Oily"
+          },
+          {
+            "id": 15,
+            "tag": "Sensitive"
+          },
+          {
+            "id": 16,
+            "tag": "All Skin Type"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "COLOR",
+        "category": [
+          {
+            "id": 21,
+            "tag": "Brown"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "PRICE",
+        "category": [
+          {
+            "id": 31,
+            "tag": "Below Rs 1,000.00"
+          },
+          {
+            "id": 32,
+            "tag": "Rs 1,000.00 - Rs 2,000.00"
+          },
+          {
+            "id": 33,
+            "tag": "Rs 2,000.00 and above"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "BRAND",
+        "category": [
+          {
+            "id": 41,
+            "tag": "Biotique"
+          },
+          {
+            "id": 42,
+            "tag": "Everyuth Naturals"
+          },
+          {
+            "id": 43,
+            "tag": "Garnier"
+          },
+          {
+            "id": 44,
+            "tag": "L'Oreal Paris"
+          },
+          {
+            "id": 45,
+            "tag": "Lakme"
+          },
+          {
+            "id": 46,
+            "tag": "Mamaearth"
+          },
+          {
+            "id": 47,
+            "tag": "Maybelline"
+          },
+          {
+            "id": 48,
+            "tag": "Neutrogena"
+          },
+          {
+            "id": 49,
+            "tag": "Nivea"
+          },
+          {
+            "id": 50,
+            "tag": "Olay"
+          },
+          {
+            "id": 51,
+            "tag": "Plum"
+          },
+          {
+            "id": 52,
+            "tag": "Pond's"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "HAIR TYPE",
+        "category": [
+          {
+            "id": 61,
+            "tag": "All Hair Type"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "FORMULATION",
+        "category": [
+          {
+            "id": 71,
+            "tag": "Balm"
+          },
+          {
+            "id": 72,
+            "tag": "Bleach"
+          },
+          {
+            "id": 73,
+            "tag": "Blush"
+          },
+          {
+            "id": 74,
+            "tag": "Cleansing Milk"
+          },
+          {
+            "id": 75,
+            "tag": "Cream"
+          },
+          {
+            "id": 76,
+            "tag": "Eye Pad"
+          },
+          {
+            "id": 77,
+            "tag": "Face Wash"
+          },
+          {
+            "id": 78,
+            "tag": "Facial Kit"
+          },
+          {
+            "id": 79,
+            "tag": "Foam"
+          },
+          {
+            "id": 80,
+            "tag": "Gel"
+          }
+        ]
+      }
+    ]
+  }

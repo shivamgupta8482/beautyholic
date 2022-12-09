@@ -1,0 +1,189 @@
+.CheckOutMainFlex{
+  justify-content: space-between;
+  margin: auto;
+}
+.FooterSimpleGrid{
+  background-color: black;
+  color: white;
+  margin: auto;
+}
+
+.FooterMainBox{
+  background-color: black;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.App {
+  /* text-align: center; */
+  /* font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; */
+}
+
+.dropdown-btn{
+
+}
+.dropdown-heading{
+  font-weight: bold;
+  text-align: start;
+}
+
+      /* navbar css start */
+
+      .navbar {
+        width: 100%;
+        overflow: hidden;
+
+        background-color: #dd0285;
+      }
+
+      .navbar a {
+        float: right;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      .dropdown {
+        float: left;
+        overflow: hidden;
+        margin-left: 10px;
+      }
+
+      .dropdown .dropbtn {
+        font-size: 16px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font: inherit;
+        margin: 0;
+        font-weight: bold;
+      }
+
+      /* .navbar a:hover, */
+      .dropdown:hover .dropbtn {
+        background-color: #c60277;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        /* width: 30%; */
+        left: 0;
+        box-shadow: 0px 8px 16px 0px rgba(238, 236, 236, 0.938);
+        z-index: 1;
+      }
+
+      .dropdown-content .header {
+        background: white;
+        padding: 16px;
+        color: white;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+        margin-left: 10px;
+      }
+      .column {
+        margin-top: -10px;
+      }
+
+      /* Create three equal columns that floats next to each other */
+      .column {
+        float: left;
+        /* width: 30%; */
+        padding: 10px;
+        margin-right: 10px;
+
+        /* margin-left: 10px; */
+      }
+      .brands {
+        display: flex;
+        justify-content: space-between;
+        border-top: 2px solid rgb(148, 148, 148);
+        margin-bottom: -18px;
+        padding-top: 18px;
+      }
+      .brands > h3:nth-child(2) {
+        font-size: 15px;
+        background-color: #dd0285;
+        color: white;
+        padding: 9px;
+      }
+
+      .bransformation {
+        width: 1100px;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 17px;
+        margin-top: 20px;
+      }
+      .bransformation > div {
+        padding: 10px 15px 10px 15px;
+        text-align: center;
+        border: 1px solid rgb(148, 148, 148);
+      }
+      .bransformation > div:hover {
+        background-color: #b8b4b4fa;
+      }
+      .extra {
+        float: left;
+        /* width: 30%; */
+        height: 140px;
+        padding: 10px;
+        margin-right: 10px;
+
+        /* margin-left: 10px; */
+      }
+
+      .column a {
+        float: none;
+        color: #666666;
+        font-size: 13px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        margin-bottom: -16px;
+        margin-left: -14px;
+        margin-top: -20px;
+      }
+
+      .navbar a:hover {
+        color: #c60277;
+      }
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+
+.Productbox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  padding: 0 0.4rem;
+  row-gap: 0.5rem;
+  border: 1px solid black;
+}
+
+      .ProductImage{
+        transition:  0.3s;
+        object-fit: contain;
+        object-fit: cover;
+
+
+      }
+      .ProductImage:hover{
+        transform: scale(1.2);
+    }
+    .ProductText{
+      flex-grow: 1;
+    }
